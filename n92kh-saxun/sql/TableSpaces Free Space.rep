@@ -1,0 +1,168 @@
+PL/SQL Developer Report
+
+[SQL]
+SELECT df.tablespace_name, df.mbytes mbytes, fs.mbytes mbytes_free, 
+	((df.mbytes-fs.mbytes)/df.mbytes)*100 percent_used
+FROM ( SELECT tablespace_name, Sum(bytes/1024/1024) mbytes 
+		FROM dba_data_files 
+		GROUP BY tablespace_name ) df,
+	( SELECT tablespace_name, sum(bytes/1024/1024) mbytes
+		FROM dba_free_space 
+		GROUP BY tablespace_name ) fs
+WHERE df.tablespace_name=fs.tablespace_name
+ORDER BY ((df.mbytes-fs.mbytes)/df.mbytes) desc
+
+[Options]
+Connect=False
+Username=
+Password=2672
+Database=
+ConnectAs=Normal
+LockMode=0
+LockedPassword=2715
+BkgColor=-16777211
+BkgImage=
+FormLayout=False
+OnlyNBSP=False
+LeftMargin=0
+TopMargin=0
+PageBreak=0
+AddSQL=False
+HandleTags=True
+
+[Styles]
+
+{Title}
+Enabled=True
+Name=Report Title
+Description=TableSpaces Free Space
+Style=Blue Title
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Param}
+Enabled=True
+Name=Variables
+Description=
+Style=Blue Variables
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Table}
+Enabled=False
+Name=Tabular Tables
+Description=
+Style=Blue Table
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Form}
+Enabled=False
+Name=Form Tables
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Field}
+Enabled=False
+Name=Default Field
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=TABLESPACE_NAME
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=MBYTES
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=MBYTES_FREE
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=9G990D00
+
+{*}
+Enabled=True
+Name=PERCENT_USED
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=0D00
+
+
+
+[CSS]
+Blue Title
+{
+  Background: #000050;
+  Color: #FFFF00;
+  Font-family: "Arial Black";
+  Font-size: 12pt;
+  Font-style: Italic;
+  Text-align: Center;
+  Width: 100%;
+}
+
+Blue Variables
+{
+  Background: #333399;
+  Color: #E0E0FF;
+  Border-style: None;
+  Border-width: 0px;
+  Border-Color: #808000;
+  Padding: 0px;
+  Font-family: Arial;
+  Font-size: 7pt;
+  Font-weight: Bold;
+}
+
+Blue Table
+{
+  Background: #5050A0;
+  Border-style: None;
+  Width: 100%;
+}
+
+

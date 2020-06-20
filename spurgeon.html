@@ -1,0 +1,19 @@
+<script language=javascript>
+    var months = new Array( "Enero",
+			    "Febrero",
+                            "Marzo",
+                            "Abril",
+                            "Mayo",
+                            "Junio",
+                            "Julio",
+                            "Agosto",
+                            "Septiembre",
+                            "Octubre",
+                            "Noviembre",
+                            "Diciembre" )
+    var today = new Date()
+    var day = today.getDate()
+    var month = months[today.getMonth()]
+
+    window.open("http://www.spurgeon.com.mx/chequera/" + day + month + ".html", "_self")
+</script>

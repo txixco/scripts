@@ -1,0 +1,35 @@
+#!/bin/bash
+#ogg2mp3
+
+#Removiendo Espacios
+rename 'y/\ /_/' *.ogg
+
+#Mayusculas a Minusculas
+rename 'y/A-Z/a-z/' *.ogg
+
+for archivo in *.ogg
+do 
+	#Conversion de archivo *.ogg a *.wav
+	oggdec $archivo;
+	#Variable auxiliar con el nombre base del archivo
+	aux="$(basename "$archivo" .ogg)"
+
+	#Descomente la siguiente linea si desea igualar el volumen de los ficheros
+	#normalize -m "$aux.wav"
+
+	#Verificamos que el usuario introduzca el bitrate
+	#En caso de no insertar el bitrate, se proporciona uno predeterminado
+	if [ -z "$1" ]
+	then
+		echo "Valor de bitrate no suministrado. Predeterminado: 192kbps."
+		lame -b 192 "$aux.wav" "$aux.mp3"
+	else
+		lame -b $1 "$aux.wav" "$aux.mp3"
+	fi
+	#Verificamos posible errores
+	#Si no hay errores, eliminamos el fichero *.wav
+	if [ $? -eq 0 ]
+	then
+		rm -f "$aux.wav"
+	fi
+done

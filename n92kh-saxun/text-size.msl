@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <image>
+    <query-font-metrics text="%[text]" font="%[font]" pointsize="%[pointsize]" />
+    <print output="Text width is %[msl:font-metrics.width] pixels.\n" />
+  </image>

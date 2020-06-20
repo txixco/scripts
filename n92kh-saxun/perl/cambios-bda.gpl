@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+BEGIN {
+    $ENV{PERL_DL_NONLAZY} = 1;
+}
+
+use FindBin;
+use lib "$FindBin::Bin";
+
+use strict;
+use warnings;
+#use diagnostics;
+
+use DBI;
+
+use Tcl::Tk;
+
+use feature qw(switch say);
+
+require "cambios-bda.pl";
+
+my $int = new Tcl::Tk;
+my $mw = $int->mainWindow;
+my $lab = $mw->Label( -text => 'Hello world' )->pack;
+my $btn = $mw->Button( -text => 'Test',
+                       -command => sub {
+                           $lab->configure( 
+                               -text => '[' . $lab->cget( '-text' ) . ']' );
+                                   } )->pack;
+
+$int->MainLoop;

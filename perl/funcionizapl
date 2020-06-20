@@ -1,0 +1,297 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+#use diagnostics;
+
+use DBI;
+use DBD::Oracle;
+
+use IO::Prompt;
+use Getopt::Long;
+
+use Text::Template;
+
+use FindBin '$Bin';
+
+use constant INDENT => '   ';
+
+my @campos = ();
+my $texto;
+
+# Opciones
+my @tablas = ();
+
+GetOptions( 'tablas=s{,}' => \@tablas );
+
+# Parametros
+my ($base, $schema, $passwd) = tomaParametros();
+
+# Establece la conexión
+my $dbh = DBI->connect("dbi:Oracle:$base", $schema, $passwd) 
+	or die "No se pudo conectar: $!";
+
+$schema = uc($schema);
+
+# Inicializa la plantilla
+my $plantilla = Text::Template->new(SOURCE => "$Bin/funcioniza.tmpl")
+	or die "No se puede abrir la plantilla: $Text::Template::ERROR";
+
+# Para cada tabla
+for (@tablas) {
+	$_ = uc($_);
+	@campos = tomaCampos($_);
+
+	my %vars = ( schema => $schema,
+				 tabla => $_,
+				 campos => \@campos,
+				 tomaArgumentos => \&tomaArgumentos,
+				 ajusta => \&ajusta,
+				 cadenaDecode => \&cadenaDecode,
+				 cadenaValues => \&cadenaValues,
+				 igualiza => \&igualiza,
+				 campoClave => \&campoClave,
+				 cadenaDelete => \&cadenaDelete );
+
+	$texto = $plantilla->fill_in(HASH => \%vars)
+		or die "Couldn't fill in template: $Text::Template::ERROR";
+
+	print "$texto\n\n";
+}
+
+# Bye
+$dbh->disconnect;
+
+
+# Subprogramas
+ sub tomaCampos {
+	my $tabla = $_;
+	my @campos = ();
+
+	my $sql = "SELECT column_name FROM all_tab_columns "
+		. "WHERE table_name = ? "
+		. "ORDER BY column_id";
+
+	my $sth = $dbh->prepare($sql);
+	$sth->execute($tabla);
+
+	my $vNomCampo;
+	$sth->bind_columns(undef, \$vNomCampo);
+
+	while($sth->fetch()) {
+		push(@campos, $vNomCampo);
+	}
+
+	$sth->finish();
+	return @campos;
+}
+
+sub tomaArgumentos {
+	my ($tabla, @campos) = @_;
+	my $retorno = "";
+	my $maxLong = tomaLongitudMaxima(@campos) + 6;
+	my $clave = campoClave($tabla);
+
+	$retorno .= INDENT . alinea("patipoop", $maxLong) . "VARCHAR2,\n";
+	
+	for (@campos) {
+		next if /ultima_modificacion/i;
+		$retorno .= INDENT . alinea("pa" . lc($_), $maxLong) . $schema 
+			. ".$tabla.$_%TYPE,\n";
+	}
+
+	if ($clave) {
+		$retorno .= INDENT . alinea("papk" . lc($clave), $maxLong)  . $schema 
+			. ".$tabla.$clave%TYPE";
+	}
+
+	return $retorno;
+}
+
+sub tomaLongitudMaxima {
+	my @elementos = @_;
+	my $max = 0;
+
+	for (@elementos) {
+		if (length($_) > $max) {
+			$max = length($_);
+		}
+	}
+
+	return $max;
+}
+
+sub alinea {
+	my ($cadena, $ancho) = @_;
+	my $n = $ancho - length($cadena);
+
+	for (my $i=0; $i<$n; $i++) {
+		$cadena .= " ";
+	}
+
+	return $cadena;
+}
+
+sub campoClave {
+	my $tabla = $_;
+	my $clave;
+	my $sql = "SELECT a.column_name FROM all_cons_columns a "
+		. "JOIN all_constraints c ON (a.constraint_name = c.constraint_name) "
+		. "WHERE c.table_name = '$tabla' AND c.constraint_type = 'P'";
+
+	my $sth = $dbh->prepare($sql);
+	$sth->execute();
+
+	my $vNomCampo;
+	$sth->bind_columns(undef, \$vNomCampo);
+
+	while($sth->fetch()) {
+		$clave = $vNomCampo;
+	}
+
+	$sth->finish();
+	return $clave;
+}
+
+sub cadenaDecode {
+	my ($margen, @campos) = @_;
+	my ($cadena, @parametros) = ('', ());
+	$margen = ' ' x $margen;
+	my $plantilla = "DECODE(&campo&, NULL, '0', &campo&) =\n"
+		. "&margen&&indent&DECODE(&campo&, NULL, '0', \n"
+		. "&margen&&indent&       NVL(&parametro&, &campo&))\n";
+
+	$margen .= INDENT;
+	for (my $i=0; $i<@campos; $i++) {
+		$parametros[$i] = "pa" . lc($campos[$i]);
+		next if ($campos[$i] eq "ULTIMA_MODIFICACION");
+		$cadena .= ($i != 0) ? $margen . "AND " : "";
+		$cadena .= $plantilla;
+		$cadena =~ s/&parametro&/$parametros[$i]/g;
+		$cadena =~ s/&campo&/$campos[$i]/g;
+		$cadena =~ s/&margen&/$margen/g;
+		$cadena =~ s/&indent&/   /g;
+	}
+
+	chomp($cadena);
+
+	return $cadena;
+}
+
+sub ajusta {
+	my ($margen, $sep, $cadena, $unoxlinea) = @_;
+	my ($retorno, $subcadena, $maxlen) = ('', '', 80 - $margen);
+
+	$margen = ' ' x $margen;
+
+	if (length($cadena) < $maxlen) {
+		$retorno = $cadena;
+	} else {
+		my @arreglo = split($sep, $cadena);
+		for (@arreglo) {
+			if ($unoxlinea 
+				|| length($subcadena) + length($sep) + length($_) > $maxlen) {
+				$retorno .= "$subcadena\n$margen";
+				$subcadena = '';
+			}
+
+			$subcadena .= "$_, ";
+		}
+	}
+
+	$retorno .= $subcadena;
+	$retorno =~ s/$sep$//;
+	$retorno =~ s/^\s+//;
+
+	return $retorno;
+}
+
+sub cadenaValues {
+	my ($tabla, @campos) = @_;
+	my $cadena = join(", ", parametriza(@campos));
+
+	my $clave = campoClave($tabla);
+	my $secuencia = "SE" . substr($tabla, 2);
+
+	my $sql = "SELECT * FROM all_sequences "
+		. "WHERE sequence_owner = '$schema' "
+		. "AND sequence_name = ?";
+
+	my $sth = $dbh->prepare($sql);
+	$sth->execute($secuencia);
+
+	if ($sth->fetch()) {
+		$cadena =~ s/pa$clave/$secuencia.nextval/g;
+	}
+
+	$sth->finish();
+
+	return $cadena;
+}
+
+sub cadenaDelete {
+	my ($margen, $tabla, @campos) = @_;
+	my @menosCampos = ();
+	
+	for (@campos) {
+		next if /^USUARIO_MODIFICA$/;
+		push(@menosCampos, $_);
+	}
+
+	return cadenaDecode($margen . INDENT, @menosCampos);
+}
+
+sub parametriza {
+	my @campos = @_;
+	my @parametros = ();
+
+	for (@campos) {
+		$_ = lc($_);
+		push(@parametros, (/ultima_modificacion/) ? "SYSDATE" : "pa$_");
+	}
+
+	return @parametros;
+}
+
+sub igualiza {
+	my @campos = @_;
+	my @igualdades = ();
+	my $igualdad;
+
+	for (@campos) {
+		$igualdad = "$_ = ";
+		$igualdad .= (/ULTIMA_MODIFICACION/) ? "SYSDATE" : "pa" . lc($_);
+		push(@igualdades, $igualdad);
+	}
+
+	return @igualdades;
+}
+
+sub tomaParametros {
+	my $params = shift @ARGV 
+		or die "Se debe especificar la cadena de conexión\n";
+
+	my @aux = split('@', $params);
+	my $schema = $aux[0] 
+		or die "Se debe especificar la cadena de conexión";
+
+	my $base = $aux[1] 
+		or die "Se debe especificar la cadena de conexión";
+
+	@aux = split('/', $schema);
+	$schema = $aux[0];
+
+	my $passwd = $aux[1] 
+		|| prompt("Introduzca la contraseña: ", -e => '*');
+
+	# Algo no anda del todo bien con «prompt»
+	return ($base, $schema, "$passwd");
+}
+
+sub saca {
+	print $_[0] . "\n";
+}
+
+### Local Variables:
+### coding: utf-8-unix
+### End:

@@ -1,0 +1,608 @@
+Compiled successfully.
+Executed successfully.
+
+46.0 APEX_CODE,DEBUG;APEX_PROFILING,INFO
+Execute Anonymous: List<String> fields =
+Execute Anonymous:         new List<String> { 
+Execute Anonymous:             'Case Type', 
+Execute Anonymous:             'Won/Lost', 
+Execute Anonymous:             'At Risk Date', 
+Execute Anonymous:             'Client Temp', 
+Execute Anonymous:             'Impairment Severity', 
+Execute Anonymous:             'Impairment Date', 
+Execute Anonymous:             'Case Reason', 
+Execute Anonymous:             'Region', 
+Execute Anonymous:             'Opportunity', 
+Execute Anonymous:             'Event Name', 
+Execute Anonymous:             'Closed Date', 
+Execute Anonymous:             'Contact ID', 
+Execute Anonymous:             'Account ID', 
+Execute Anonymous:             'Name', 
+Execute Anonymous:             'Email Address', 
+Execute Anonymous:             'Description', 
+Execute Anonymous:             'Priority', 
+Execute Anonymous:             'Case Origin', 
+Execute Anonymous:             'Subject', 
+Execute Anonymous:             'Case Number', 
+Execute Anonymous:             'Created By ID', 
+Execute Anonymous:             'Created Date', 
+Execute Anonymous:             'Case Currency', 
+Execute Anonymous:             'New Self-Service Comment', 
+Execute Anonymous:             'Self-Service Commented', 
+Execute Anonymous:             'Case ID', 
+Execute Anonymous:             'Notice Received', 
+Execute Anonymous:             'Owner ID', 
+Execute Anonymous:             'Record Type ID', 
+Execute Anonymous:             'Revenue At Risk', 
+Execute Anonymous:             'Status', 
+Execute Anonymous:             'System Modstamp', 
+Execute Anonymous:             'Internal Comments', 
+Execute Anonymous:             'Contact Email', 
+Execute Anonymous:             'Contact Fax', 
+Execute Anonymous:             'Contact Mobile', 
+Execute Anonymous:             'Contact Phone' 
+Execute Anonymous:           };
+Execute Anonymous: 
+Execute Anonymous: String template = 'SELECT DISTINCT\n' +
+Execute Anonymous:         '    "INXPO-172" jira_number, "" jira_bug, "" jira_bug_comment, \n' +
+Execute Anonymous:         '    "Case" object_name, "{0} Field Mismatch" jira_desc, \n' +
+Execute Anonymous:         '    TO_CHAR(SYSDATE, "DD-MON-YYYY") test_date, TO_CHAR(trg.id) west_id, \n' +
+Execute Anonymous:         '    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.{1}), "NULL") west_value, \n' +
+Execute Anonymous:         '    NVL(TO_CHAR(src.{1}), "NULL") inxpo_value\n' +
+Execute Anonymous:         'FROM \n' +
+Execute Anonymous:         '    sfdc.v_sf_inx_src_case src\n' +
+Execute Anonymous:         '    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)\n' +
+Execute Anonymous:         'WHERE\n' +
+Execute Anonymous:         '    NVL(TO_CHAR(trg.{1}), "NULL") <> NVL(TO_CHAR(src.{1}), "NULL")';
+Execute Anonymous: 
+Execute Anonymous: String union = '\n\nUNION ALL\n\n';
+Execute Anonymous: 
+Execute Anonymous: List<String> queries = new List<String>();
+Execute Anonymous: 
+Execute Anonymous: //System.debug(template);
+Execute Anonymous: 
+Execute Anonymous: Map <String, Schema.SObjectType> schemaMap = 
+Execute Anonymous:         Schema.getGlobalDescribe();
+Execute Anonymous: Map <String, Schema.SObjectField> fieldMap = 
+Execute Anonymous:         schemaMap.get('Case').getDescribe().fields.getMap();
+Execute Anonymous: 
+Execute Anonymous: for (Schema.SObjectField sfield : fieldMap.Values()) {
+Execute Anonymous:     schema.describefieldresult dfield = sfield.getDescribe();
+Execute Anonymous:     if (fields.contains(dfield.getLabel())) {
+Execute Anonymous:         String query = String.format(template, 
+Execute Anonymous:                                      new List<Object> {
+Execute Anonymous:                                              dfield.getLabel(),
+Execute Anonymous:                                              dfield.getName()
+Execute Anonymous:                               });
+Execute Anonymous:         query = query.replace('\'', '\'\'');
+Execute Anonymous:         query = query.replace('"', '\'');
+Execute Anonymous: //        system.debug(query);
+Execute Anonymous:         queries.add(query);
+Execute Anonymous:     }
+Execute Anonymous: }
+Execute Anonymous: 
+Execute Anonymous: System.debug(String.join(queries, union) + ';');
+14:56:01.36 (36475104)|USER_INFO|[EXTERNAL]|005f2000006ztHs|fjrueda@west.com|(GMT-05:00) Central Daylight Time (America/Mexico_City)|GMT-05:00
+14:56:01.36 (36527111)|EXECUTION_STARTED
+14:56:01.36 (36538966)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex
+14:56:02.112 (1112429026)|USER_DEBUG|[80]|DEBUG|SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Case ID Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Id), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Id), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Id), 'NULL') <> NVL(TO_CHAR(src.Id), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Case Number Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.CaseNumber), 'NULL') west_value, 
+    NVL(TO_CHAR(src.CaseNumber), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.CaseNumber), 'NULL') <> NVL(TO_CHAR(src.CaseNumber), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Name Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.SuppliedName), 'NULL') west_value, 
+    NVL(TO_CHAR(src.SuppliedName), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.SuppliedName), 'NULL') <> NVL(TO_CHAR(src.SuppliedName), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Email Address Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.SuppliedEmail), 'NULL') west_value, 
+    NVL(TO_CHAR(src.SuppliedEmail), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.SuppliedEmail), 'NULL') <> NVL(TO_CHAR(src.SuppliedEmail), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Case Type Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Type), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Type), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Type), 'NULL') <> NVL(TO_CHAR(src.Type), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Record Type ID Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.RecordTypeId), 'NULL') west_value, 
+    NVL(TO_CHAR(src.RecordTypeId), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.RecordTypeId), 'NULL') <> NVL(TO_CHAR(src.RecordTypeId), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Status Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Status), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Status), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Status), 'NULL') <> NVL(TO_CHAR(src.Status), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Case Reason Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Reason), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Reason), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Reason), 'NULL') <> NVL(TO_CHAR(src.Reason), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Case Origin Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Origin), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Origin), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Origin), 'NULL') <> NVL(TO_CHAR(src.Origin), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Subject Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Subject), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Subject), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Subject), 'NULL') <> NVL(TO_CHAR(src.Subject), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Priority Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Priority), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Priority), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Priority), 'NULL') <> NVL(TO_CHAR(src.Priority), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Description Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Description), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Description), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Description), 'NULL') <> NVL(TO_CHAR(src.Description), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Closed Date Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.ClosedDate), 'NULL') west_value, 
+    NVL(TO_CHAR(src.ClosedDate), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.ClosedDate), 'NULL') <> NVL(TO_CHAR(src.ClosedDate), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'New Self-Service Comment Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.HasCommentsUnreadByOwner), 'NULL') west_value, 
+    NVL(TO_CHAR(src.HasCommentsUnreadByOwner), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.HasCommentsUnreadByOwner), 'NULL') <> NVL(TO_CHAR(src.HasCommentsUnreadByOwner), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Self-Service Commented Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.HasSelfServiceComments), 'NULL') west_value, 
+    NVL(TO_CHAR(src.HasSelfServiceComments), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.HasSelfServiceComments), 'NULL') <> NVL(TO_CHAR(src.HasSelfServiceComments), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Case Currency Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.CurrencyIsoCode), 'NULL') west_value, 
+    NVL(TO_CHAR(src.CurrencyIsoCode), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.CurrencyIsoCode), 'NULL') <> NVL(TO_CHAR(src.CurrencyIsoCode), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Owner ID Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.OwnerId), 'NULL') west_value, 
+    NVL(TO_CHAR(src.OwnerId), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.OwnerId), 'NULL') <> NVL(TO_CHAR(src.OwnerId), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Created Date Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.CreatedDate), 'NULL') west_value, 
+    NVL(TO_CHAR(src.CreatedDate), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.CreatedDate), 'NULL') <> NVL(TO_CHAR(src.CreatedDate), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Created By ID Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.CreatedById), 'NULL') west_value, 
+    NVL(TO_CHAR(src.CreatedById), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.CreatedById), 'NULL') <> NVL(TO_CHAR(src.CreatedById), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'System Modstamp Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.SystemModstamp), 'NULL') west_value, 
+    NVL(TO_CHAR(src.SystemModstamp), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.SystemModstamp), 'NULL') <> NVL(TO_CHAR(src.SystemModstamp), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Internal Comments Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Comments), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Comments), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Comments), 'NULL') <> NVL(TO_CHAR(src.Comments), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Region Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Region__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Region__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Region__c), 'NULL') <> NVL(TO_CHAR(src.Region__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Contact Email Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Caller_EMail__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Caller_EMail__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Caller_EMail__c), 'NULL') <> NVL(TO_CHAR(src.Caller_EMail__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Case Reason Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Case_Reason__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Case_Reason__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Case_Reason__c), 'NULL') <> NVL(TO_CHAR(src.Case_Reason__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'At Risk Date Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.At_Risk_Date__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.At_Risk_Date__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.At_Risk_Date__c), 'NULL') <> NVL(TO_CHAR(src.At_Risk_Date__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Client Temp Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Client_Temp__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Client_Temp__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Client_Temp__c), 'NULL') <> NVL(TO_CHAR(src.Client_Temp__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Impairment Date Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Impairment_Date__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Impairment_Date__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Impairment_Date__c), 'NULL') <> NVL(TO_CHAR(src.Impairment_Date__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Impairment Severity Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Impairment_Severity__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Impairment_Severity__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Impairment_Severity__c), 'NULL') <> NVL(TO_CHAR(src.Impairment_Severity__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Notice Received Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Notice_Received__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Notice_Received__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Notice_Received__c), 'NULL') <> NVL(TO_CHAR(src.Notice_Received__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Case Type Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Case_Type__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Case_Type__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Case_Type__c), 'NULL') <> NVL(TO_CHAR(src.Case_Type__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Revenue At Risk Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Revenue_At_Risk__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Revenue_At_Risk__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Revenue_At_Risk__c), 'NULL') <> NVL(TO_CHAR(src.Revenue_At_Risk__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Region Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Region_multipicklist__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Region_multipicklist__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Region_multipicklist__c), 'NULL') <> NVL(TO_CHAR(src.Region_multipicklist__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Won/Lost Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Won_Lost__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Won_Lost__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Won_Lost__c), 'NULL') <> NVL(TO_CHAR(src.Won_Lost__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Event Name Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Event_Name__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Event_Name__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Event_Name__c), 'NULL') <> NVL(TO_CHAR(src.Event_Name__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Opportunity Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Opportunity__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Opportunity__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Opportunity__c), 'NULL') <> NVL(TO_CHAR(src.Opportunity__c), 'NULL')
+
+UNION ALL
+
+SELECT DISTINCT
+    'INXPO-172' jira_number, '' jira_bug, '' jira_bug_comment, 
+    'Case' object_name, 'Internal Comments Field Mismatch' jira_desc, 
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') test_date, TO_CHAR(trg.id) west_id, 
+    TO_CHAR(src.id) inxpo_id, NVL(TO_CHAR(trg.Internal_Comments__c), 'NULL') west_value, 
+    NVL(TO_CHAR(src.Internal_Comments__c), 'NULL') inxpo_value
+FROM 
+    sfdc.v_sf_inx_src_case src
+    JOIN sfdc.v_sf_inx_trg_case trg ON (src.casenumber = trg.casenumber)
+WHERE
+    NVL(TO_CHAR(trg.Internal_Comments__c), 'NULL') <> NVL(TO_CHAR(src.Internal_Comments__c), 'NULL');
+14:56:02.112 (1112860303)|CUMULATIVE_LIMIT_USAGE
+14:56:02.112 (1112860303)|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 0 out of 100
+  Number of query rows: 0 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 0 out of 150
+  Number of DML rows: 0 out of 10000
+  Maximum CPU time: 585 out of 40000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+14:56:02.112 (1112860303)|CUMULATIVE_LIMIT_USAGE_END
+
+14:56:02.112 (1112936208)|CODE_UNIT_FINISHED|execute_anonymous_apex
+14:56:02.112 (1115033796)|EXECUTION_FINISHED
+

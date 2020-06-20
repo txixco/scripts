@@ -1,0 +1,64 @@
+CREATE OR REPLACE FUNCTION {$schema}.FN{$tabla} (
+{ tomaArgumentos($tabla, @campos) }
+) RETURN {$schema}.PATYPECURSOR.TYPCURSOR
+
+IS
+   curtabla    {$schema}.PATYPECURSOR.TYPCURSOR;
+   vlregafec   NUMBER;
+
+BEGIN
+   EXECUTE IMMEDIATE 'ALTER SESSION SET NLS_DATE_FORMAT=''DD/MM/YYYY''';
+
+   CASE patipoop
+      WHEN 'S' THEN
+         OPEN curtabla FOR
+            SELECT { ajusta(19, ', ', join(', ', @campos)) }
+            FROM {$schema}.{$tabla}
+            WHERE { cadenaDecode(15, @campos) };
+
+      WHEN 'I' THEN
+         INSERT INTO {$schema}.{$tabla}
+            ({ ajusta(13, ', ', join(', ', @campos)) })
+         VALUES ({ ajusta(17, ', ', cadenaValues($tabla, @campos)) });
+
+         vlregafec := SQL%ROWCOUNT;
+         COMMIT;
+
+         OPEN curtabla FOR
+            SELECT vlregafec
+            FROM SYS.DUAL;
+
+      WHEN 'U' THEN
+         UPDATE {$schema}.{$tabla}
+         SET { ajusta(13, ', ', join(', ', igualiza(@campos)), 1) }
+         WHERE DECODE({ campoClave($tabla) }, NULL, '0', { campoClave($tabla) }) =
+               DECODE({ campoClave($tabla) }, NULL, '0',
+                     NVL(papk{ lc(campoClave($tabla)) }, { campoClave($tabla) }));
+
+         vlregafec := SQL%ROWCOUNT;
+         COMMIT;
+
+         OPEN curtabla FOR
+            SELECT vlregafec
+            FROM SYS.DUAL;
+
+      WHEN 'D' THEN
+         DELETE {$schema}.{$tabla}
+         WHERE { cadenaDelete(15, $tabla, @campos) };
+
+         vlregafec := SQL%ROWCOUNT;
+         COMMIT;
+
+         OPEN curtabla FOR
+            SELECT vlregafec
+            FROM SYS.DUAL;
+   END CASE;
+
+   RETURN curtabla;
+
+EXCEPTION
+   WHEN OTHERS THEN
+      ROLLBACK;
+      RAISE;
+END FN{$tabla};
+/

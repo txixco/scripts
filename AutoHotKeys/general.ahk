@@ -260,8 +260,8 @@ $Space::
     return
 
 #N::
-;	Run "C:\Program Files (x86)\Vim\vim81\gvim.exe"
-	Run "C:\Programs\emacs\bin\runemacs.exe"
+	Run "C:\Program Files (x86)\Vim\vim81\gvim.exe"
+;	Run "C:\Programs\emacs\bin\runemacs.exe"
 ;	Run notepad++.exe
 ;	Run "C:\Users\frueda\AppData\Local\atom\atom.exe"
 	return
@@ -290,6 +290,10 @@ $Space::
 ;#P::
 ;    Run programacion.ahk
 ;    return
+
+#Q::
+    Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window
+    return
 
 #!R::
     OpenBrowser("https://read.amazon.com/", "Kindle Cloud Reader")
@@ -336,18 +340,11 @@ $Space::
 
 	return
 
-#V::
-	;if VPNStarted = true
-	;{
-	;	Run "C:\Dropbox\Documents\scripts\VPN Stop.lnk"
-	;	VPNStarted = false
-	;}
-	;else
-	;{
-	;	Run "C:\Dropbox\Documents\scripts\VPN Start.lnk"
-	;	VPNStarted = true
-	;}
+#U::
+    Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\UiPath\UiPath Studio"
+    return
 
+#^V::
     Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Cisco\Cisco AnyConnect Secure Mobility Client\Cisco AnyConnect Secure Mobility Client"
     MyWinWait("Cisco AnyConnect Secure Mobility Client", "", 30)
     ControlClick Disconnect, Cisco AnyConnect Secure Mobility Client
@@ -356,11 +353,11 @@ $Space::
 
     ControlClick Connect, Cisco AnyConnect Secure Mobility Client
 
-    WaitUserInput("Cisco AnyConnect | swn01vpn.west.com", "", 30)
-    MyWinWait("Cisco AnyConnect | swn01vpn.west.com", "", 30)
+    WaitUserInput("Cisco AnyConnect | ", "", 30)
+    MyWinWait("Cisco AnyConnect | ", "", 30)
     Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Entrust\IdentityGuard Soft Token"
     MyWinWait("Entrust IdentityGuard Token", "West-frueda", 30)
-    ControlClick X390 Y214, Entrust IdentityGuard Token
+    ControlClick X267 Y127, Entrust IdentityGuard Token
     Sleep 1000
     Send !{F4}
     Sleep 1000

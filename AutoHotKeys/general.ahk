@@ -98,7 +98,7 @@ WaitUserInput(WinTitle, WinText, Time)
 :*:#cel::5541904710
 :*:#bncmr::4772913036789909
 :*:#hsbc::4910896120663549
-:*:#sacmex::2635017612010028
+:*:#sacmex::2437199632010376
 :*:#fctvl::6273181119965742
 :*:#imss::21067302816
 :*:#env::Windows 7 Enterprise 64bits, Chrome 34
@@ -204,12 +204,17 @@ $Space::
     return
 
 #+D::
-    OpenBrowser("http://dle.rae.es/?w=diccionario", "Diccionario")
+    OpenBrowser("https://dle.rae.es/?w=diccionario", "Diccionario")
 
     return
 
 #!D::
-    OpenBrowser("http://www.wordreference.com", "WordReference", 70)
+    OpenBrowser("https://www.wordreference.com", "WordReference", 70)
+
+    return
+
+#^D::
+    OpenBrowser("https://www.deepl.com/translator", "DeepL Translate", 70)
 
     return
 

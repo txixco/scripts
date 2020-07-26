@@ -5,7 +5,8 @@ Operations over the gas database
 """
 
 import os
-import json
+import pickle
+
 from datetime import datetime
 
 class Gas(object):
@@ -17,33 +18,63 @@ class Gas(object):
         self.user = user
         self.date = date if date is not None else datetime.now()
 
+    def __repr__(self):
+        return "{}|{}".format(self.user, self.date)
+
+    def __str__(self):
+        return "User: {}\nDate: {}".format(self.user, self.date)
+
 class GasDB(object):
     """
     Class to represent the database
     """
 
-    __FILE_NAME = "gas.db"
+    __FILE_NAME = "{}{}gas.db".format(os.path.dirname(os.path.realpath(__file__)), os.sep)
+    __USERS = ["txixco", "joshurm", "ara"]
 
     def __init__(self):
         if not os.path.isfile(self.__FILE_NAME):
             print("Creating the file {}, as it doesn't exist".format(self.__FILE_NAME))
-            with open(self.__FILE_NAME, "w") as file:
-                file.write("")
+            self.__create()
+
+    def __create(self):
+        with open(self.__FILE_NAME, "x"):
+            pass
 
     def add(self, gas):
         """
         Adds a record to the database
         """
 
-        with open(self.__FILE_NAME) as file:
-            file.write(json.dumps(gas))
+        with open(self.__FILE_NAME, "ab") as file:
+            pickle.dump(gas, file, pickle.HIGHEST_PROTOCOL)
 
     def new(self, user, date=None):
         """
         Creates a new record
         """
 
-        date = date if date is not None else datetime.now()
-        record = Gas(user, date)
+        return Gas(user, date)
 
-        return record
+    def get_records(self):
+        """
+        Get the records from the db to an array
+        """
+
+        records = []
+        with open(self.__FILE_NAME, "rb") as file:
+            while True:
+                try:
+                    records.append(pickle.load(file))
+                except EOFError:
+                    break
+
+        return records
+
+    def clean(self):
+        """
+        Clear TOTALLY the content of the DB
+        """
+
+        os.remove(self.__FILE_NAME)
+        self.__create()

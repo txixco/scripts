@@ -88,11 +88,13 @@ WaitUserInput(WinTitle, WinText, Time)
 ; **************
 
 :*:@proton::frueda@protonmail.com
+:*:@tuta::frueda@tutanota.com
 :*:@txixco::txixco@gmail.com
 :*:@frueda::fruedadev@gmail.com
 :*:@paymex::txixco.paymex@gmail.com
 :*:@west::fjrueda@west.com
 :*:@intrado::fjrueda@intrado.com
+:*:@autobot::automationbot@west.com
 
 :*r:#intcel::+5215541904710
 :*:#cel::5541904710
@@ -214,7 +216,8 @@ $Space::
     return
 
 #^D::
-    OpenBrowser("https://www.deepl.com/translator", "DeepL Translate", 70)
+;    OpenBrowser("https://www.deepl.com/translator", "DeepL Translate", 70)
+    Run "C:\Users\frueda\AppData\Local\DeepL\DeepL.exe"
 
     return
 
@@ -852,35 +855,35 @@ MoveWindow:
 ; *******************
 ; * Window movement *
 ; *******************
-#Left::
+#+Left::
 	WinGetPos WinX, WinY, WinW, WinH, A
 	WinX -= 10
 	Gosub MoveWindow
 
 	return
 
-#Right::
+#+Right::
 	WinGetPos WinX, WinY, WinW, WinH, A
 	WinX += 10
 	Gosub MoveWindow
 
 	return
 
-#Up::
+#+Up::
 	WinGetPos WinX, WinY, WinW, WinH, A
 	WinY -= 10
 	Gosub MoveWindow
 
 	return
 
-#Down::
+#+Down::
 	WinGetPos WinX, WinY, WinW, WinH, A
 	WinY += 10
 	Gosub MoveWindow
 
 	return
 
-#+Left::
+#!Left::
 	WinGetPos WinX, WinY, WinW, WinH, A
 	WinX += 5
 	WinW -= 10
@@ -888,7 +891,7 @@ MoveWindow:
 
 	return
 
-#+Right::
+#!Right::
 	WinGetPos WinX, WinY, WinW, WinH, A
 	WinX -= 5
 	WinW += 10
@@ -896,7 +899,7 @@ MoveWindow:
 
 	return
 
-#+Up::
+#!Up::
 	WinGetPos WinX, WinY, WinW, WinH, A
 	WinY += 5
 	WinH -= 10
@@ -904,7 +907,7 @@ MoveWindow:
 
 	return
 
-#+Down::
+#!Down::
 	WinGetPos WinX, WinY, WinW, WinH, A
 	WinY -= 5
 	WinH += 10

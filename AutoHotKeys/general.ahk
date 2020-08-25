@@ -222,7 +222,7 @@ $Space::
     return
 
 #E::
-    Run "C:\Programs\Explorer++\Explorer++.exe"
+    Run "C:\Programs\Misc\Explorer++.exe"
 
     return
 

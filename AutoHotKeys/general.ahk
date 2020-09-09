@@ -216,8 +216,8 @@ $Space::
     return
 
 #^D::
-;    OpenBrowser("https://www.deepl.com/translator", "DeepL Translate", 70)
-    Run "C:\Users\frueda\AppData\Local\DeepL\DeepL.exe"
+    OpenBrowser("https://www.deepl.com/translator", "DeepL Translate", 70)
+;    Run "C:\Users\frueda\AppData\Local\DeepL\DeepL.exe"
 
     return
 
@@ -268,7 +268,8 @@ $Space::
     return
 
 #N::
-	Run "C:\Program Files (x86)\Vim\vim81\gvim.exe"
+;	Run "C:\Program Files (x86)\Vim\vim82\gvim.exe"
+    Run "C:\Data\Links\Utils\Neovim.lnk"
 ;	Run "C:\Programs\emacs\bin\runemacs.exe"
 ;	Run notepad++.exe
 ;	Run "C:\Users\frueda\AppData\Local\atom\atom.exe"
@@ -361,15 +362,15 @@ $Space::
 
     ControlClick Connect, Cisco AnyConnect Secure Mobility Client
 
-    WaitUserInput("Cisco AnyConnect | ", "", 30)
-    MyWinWait("Cisco AnyConnect | ", "", 30)
-    Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Entrust\IdentityGuard Soft Token"
-    MyWinWait("Entrust IdentityGuard Token", "West-frueda", 30)
-    ControlClick X267 Y127, Entrust IdentityGuard Token
-    Sleep 1000
-    Send !{F4}
-    Sleep 1000
-    Send +{Insert}{Enter}
+;    WaitUserInput("Cisco AnyConnect | ", "", 30)
+;    MyWinWait("Cisco AnyConnect | ", "", 30)
+;    Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Entrust\IdentityGuard Soft Token"
+;    MyWinWait("Entrust IdentityGuard Token", "West-frueda", 30)
+;    ControlClick X267 Y127, Entrust IdentityGuard Token
+;    Sleep 1000
+;    Send !{F4}
+;    Sleep 1000
+;    Send +{Insert}{Enter}
 
     return
 
@@ -593,7 +594,7 @@ $Space::
 
 #Delete::
 Pause::
-    Run "C:\Users\frueda\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scripts\MoveIt.lnk"
+    Run "C:\Data\Links\Utils\MoveIt.lnk"
     return
 
 ; Snapshots

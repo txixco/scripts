@@ -658,7 +658,7 @@ Pause::
 ; *******************
 
 ^#Insert::
-^Media_Play_Pause:: Run "C:\Users\frueda\AppData\Roaming\Spotify\Spotify.exe"
+^Media_Play_Pause:: Run "%A_appdata%\Spotify\Spotify.exe"
 
 !Browser_Home:: Run C:\Programs\qutebrowser\qutebrowser.exe
 

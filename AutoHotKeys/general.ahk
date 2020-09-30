@@ -269,7 +269,8 @@ $Space::
 
 #N::
 ;	Run "C:\Program Files (x86)\Vim\vim82\gvim.exe"
-    Run "C:\Data\Links\Utils\Neovim.lnk"
+;   Run "C:\Data\Links\Utils\Neovim.lnk"
+    Run "runemacs.exe"
 ;	Run "C:\Programs\emacs\bin\runemacs.exe"
 ;	Run notepad++.exe
 ;	Run "C:\Users\frueda\AppData\Local\atom\atom.exe"

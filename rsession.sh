@@ -3,9 +3,9 @@
 tmux has-session -t $1
 if [ $? != 0 ]
 then
-    tmux new -s $1 -n dunning-letters -c Code/UIPath/finance---dunning-letters -d
-    tmux split-window -h -c Code/UIPath/application-libraries
-    tmux select-pane -t {left}
+    tmux new -s $1 -n dunning-letters -c Code/UIPath -d cmatrix
+    tmux split-window -h -c Code/UIPath/finance---dunning-letters
+    tmux split-window -v -c Code/UIPath/application-libraries
  
     tmux select-window -t $1:dunning-letters
 fi

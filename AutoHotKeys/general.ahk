@@ -95,6 +95,7 @@ WaitUserInput(WinTitle, WinText, Time)
 :*:@west::fjrueda@west.com
 :*:@intrado::fjrueda@intrado.com
 :*:@autobot::automationbot@west.com
+:*:@rpa::rpa_dev@west.com
 
 :*r:#intcel::+5215541904710
 :*:#cel::5541904710
@@ -205,6 +206,10 @@ $Space::
     counter++
     return
 
+#!C::
+   Run C:\Programs\Zenity\zenity.exe --calendar --modal
+   return
+
 #+D::
     OpenBrowser("https://dle.rae.es/?w=diccionario", "Diccionario")
 
@@ -269,8 +274,8 @@ $Space::
 
 #N::
 ;	Run "C:\Program Files (x86)\Vim\vim82\gvim.exe"
-;   Run "C:\Data\Links\Utils\Neovim.lnk"
-    Run "runemacs.exe"
+    Run "C:\Data\Links\Utils\Neovim.lnk"
+;   Run "runemacs.exe"
 ;	Run "C:\Programs\emacs\bin\runemacs.exe"
 ;	Run notepad++.exe
 ;	Run "C:\Users\frueda\AppData\Local\atom\atom.exe"
@@ -398,14 +403,6 @@ $Space::
     CenterWindow("", 70)
     return
 
-#+W::
-    WeeklyUpdate = http://confluence.west.com:8080/pages/createblogpost.action?spaceKey=~bbannist
-    WeeklyDoc = https://docs.google.com/document/d/1ebo-ZgWMpWHLIUarGLFqiDk8lECghz32D6g0rAwAOO0/edit#
-    EnvGet, AppDataVar, LOCALAPPDATA
-    Run "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" %WeeklyUpdate% %WeeklyDoc%
-
-    return
-
 ; Open Outlook
 #Z::Run outlook.exe
 
@@ -528,17 +525,9 @@ $Space::
     return
 
 #^F9::
-    Send Tester{Tab}Tester{Tab 2}
+    InputBox string, Set variables, String to write?, , , , , , , , %string%
     Sleep 500
-    Send {Enter}
-    return
-
-#!^F9::
-	Send @west.com
-    Send {Tab}
-	Send abcdef12345
-    Sleep 500
-	Send {Enter}
+    Send %string%
     return
 
 !F9::

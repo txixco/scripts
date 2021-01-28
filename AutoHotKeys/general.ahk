@@ -46,11 +46,28 @@ CenterWindow(WinTitle, WidthPercent:=50)
 
 OpenBrowser(URL, WinTitle, WidthPercent=50)
 {
-    EnvGet, AppDataVar, LOCALAPPDATA
-;    Run "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --new-window %URL%
-    Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
+    Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-window %URL%
+;    Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
+;    Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
 
     CenterWindow(WinTitle, WidthPercent)
+}
+
+OpenMultiBrowser(WinTitle, WidthPercent=50, URLs*)
+{
+    for index, url in URLs
+    {
+    	if (index = 1)
+	{
+	   OpenBrowser(URL, WinTitle, WidthPercent)
+	} 
+	else
+	{
+           Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-tab %URL%
+;           Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-tab %URL%
+;           Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target tab-bg-silent %url%
+	}
+    }
 }
 
 MyWinWait(WinTitle, WinText, Time)
@@ -162,6 +179,21 @@ WaitUserInput(WinTitle, WinText, Time)
 
 ::tbr::Thanks and best regards.
 ::tia::Thanks in advance and best regards.
+
+; Emojis
+:*::)::😊
+:*:;)::😉
+:*:B)::😎
+:*:;P::😜
+:*::P::😛
+:*::D::😄
+:*:|D::😁
+:*:XD::😂
+:*::B::🤭
+:*:O:)::😇
+:*::(::😟
+:*:K(::😔
+:*::`(::😢
 
 ; *********************
 ; * Hotkeys - Letters *
@@ -409,8 +441,8 @@ $Space::
 ; New e-mail on Outlook
 #+Z::Run outlook.exe /c ipm.note
 
-; Open Lync
-#!Z::Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Skype for Business 2016.lnk"
+; Open alternative emails
+#!Z::OpenMultiBrowser("ProtonMail", 70, "https://beta.protonmail.com/u/0/inbox", "https://mail.tutanota.com")
 
 ; *************************
 ; * Hotkeys - Non-Letters *

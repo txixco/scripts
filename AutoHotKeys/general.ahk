@@ -46,8 +46,8 @@ CenterWindow(WinTitle, WidthPercent:=50)
 
 OpenBrowser(URL, WinTitle, WidthPercent=50)
 {
-    Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-window %URL%
-;    Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
+;    Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-window %URL%
+    Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
 ;    Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
 
     CenterWindow(WinTitle, WidthPercent)
@@ -60,11 +60,11 @@ OpenMultiBrowser(WinTitle, WidthPercent=50, URLs*)
     	if (index = 1)
 	{
 	   OpenBrowser(URL, WinTitle, WidthPercent)
-	} 
+	}
 	else
 	{
-           Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-tab %URL%
-;           Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-tab %URL%
+;           Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-tab %URL%
+           Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-tab %URL%
 ;           Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target tab-bg-silent %url%
 	}
     }
@@ -181,7 +181,8 @@ WaitUserInput(WinTitle, WinText, Time)
 ::tia::Thanks in advance and best regards.
 
 ; Emojis
-:*::)::😊
+:*::)::🙂
+:*:|)::😊
 :*:;)::😉
 :*:B)::😎
 :*:;P::😜
@@ -193,7 +194,7 @@ WaitUserInput(WinTitle, WinText, Time)
 :*:O:)::😇
 :*::(::😟
 :*:K(::😔
-:*::`(::😢
+:*::,(::😢
 
 ; *********************
 ; * Hotkeys - Letters *
@@ -469,7 +470,7 @@ $Space::
 
 ; Window dependent help
 #F1::
-    IfWinActive WebStorm 
+    IfWinActive WebStorm
     {
         Run "C:\Dropbox\My Ebooks\WebStorm_ReferenceCard_Windows_Linux.pdf"
     }

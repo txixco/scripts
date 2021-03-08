@@ -106,6 +106,7 @@ WaitUserInput(WinTitle, WinText, Time)
 
 :*:@proton::frueda@protonmail.com
 :*:@tuta::frueda@tutanota.com
+:*:@outlook::txixco@outlook.com
 :*:@txixco::txixco@gmail.com
 :*:@frueda::fruedadev@gmail.com
 :*:@paymex::txixco.paymex@gmail.com
@@ -181,20 +182,20 @@ WaitUserInput(WinTitle, WinText, Time)
 ::tia::Thanks in advance and best regards.
 
 ; Emojis
-:*::)::🙂
-:*:|)::😊
-:*:;)::😉
-:*:B)::😎
-:*:;P::😜
-:*::P::😛
-:*::D::😄
-:*:|D::😁
-:*:XD::😂
-:*::B::🤭
-:*:O:)::😇
-:*::(::😟
-:*:K(::😔
-:*::,(::😢
+;:*::)::🙂
+;:*:|)::😊
+;:*:;)::😉
+;:*:B)::😎
+;:*:;P::😜
+;:*::P::😛
+;:*::D::😄
+;:*:|D::😁
+;:*:XD::😂
+;:*::B::🤭
+;:*:O:)::😇
+;:*::(::😟
+;:*:K(::😔
+;:*::,(::😢
 
 ; *********************
 ; * Hotkeys - Letters *
@@ -261,6 +262,11 @@ $Space::
 
 #E::
     Run "C:\Programs\Misc\Explorer++.exe"
+
+    return
+
+#!E::
+    OpenBrowser("https://nx15083.your-storageshare.de/apps/files", "Storage Share", 70)
 
     return
 
@@ -334,10 +340,13 @@ $Space::
 
    return
 
-; Open Programacion script
-;#P::
-;    Run programacion.ahk
-;    return
+#P::
+    SendInput frueda@protonmail.com{Tab}5541904710
+    return
+
+#!P::
+    SendInput Francisco J Rueda C{Tab}4815153008293403{Tab}11{Tab}2023{Tab}
+    return
 
 #Q::
     Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window

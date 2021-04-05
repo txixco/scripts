@@ -217,6 +217,10 @@ $Space::
 	OpenBrowser("https://www.bible.com/", "Biblia")
 	return
 
+#^B::
+	OpenBrowser("https://my.bible.com/es-ES/users/txixco/reading-plans/64-reading-gods-story/subscription/597501492", "my.bible.com")
+	return
+
 #!B::
 	Months := ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 	FormatTime Day, , d

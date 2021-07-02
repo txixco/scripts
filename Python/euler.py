@@ -1,27 +1,30 @@
 #!/usr/bin/env python3
 
 from datetime import datetime, timedelta
+from mathutils import primesProduct
 
-DIGITS = 3
+MAXDIVISOR = 20
 
-def maxPalindrome(digits):
-    min = 10 ** (digits-1)
-    max = (10 ** digits) - 1
-    maxPal = 0
+def isMultiple(n):
+    for i in range(3, MAXDIVISOR+1):
+        if (n % i != 0):
+            return False
 
-    for i in range(min, max+1):
-        for j in range(i, max+1):
-            num = i * j
-            if ((str(num) == str(num)[::-1]) and (num > maxPal)):
-                ret = (i, j, num)
-                maxPal = num
+    return True
 
-    return ret
+def smallest():
+    steps = primesProduct(MAXDIVISOR)
+    i = steps
+    while True:
+        print(f"\rCurrent: {i}", end="\r")
+        if isMultiple(i):
+            return i
+        
+        i += steps
 
 print()
-print(f"Getting the max palindrome, product of two numbers of {DIGITS} digits")
+print(f"Getting the smallest multiple of all the numbers between 1 and {MAXDIVISOR}")
 start = datetime.now()
-(num1, num2, res) = maxPalindrome(DIGITS)
-print(f"The max palindrome number is {num1} x {num2} = {res}")
+print(f"The smallest number is {smallest()}")
 print(f"Elapsed time: {datetime.now() - start} ")
 print()

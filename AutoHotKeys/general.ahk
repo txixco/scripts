@@ -17,87 +17,87 @@ VPNStarted = true
 
 GetComment()
 {
-    FormatTime CurrentDate, , M/dd/yyyy
-    Return "frueda " . CurrentDate
+	FormatTime CurrentDate, , M/dd/yyyy
+		Return "frueda " . CurrentDate
 }
 
 Explorer(file)
 {
-   Run explorer.exe %file%
-   return
+	Run explorer.exe %file%
+		return
 }
 
 CenterWindow(WinTitle, WidthPercent:=50)
 {
-    if (WinTitle = "")
-    {
-        WinGetTitle WinTitle, A
-    }
+	if (WinTitle = "")
+	{
+		WinGetTitle WinTitle, A
+	}
 
-    Width := A_ScreenWidth * WidthPercent / 100
-    Height := A_ScreenHeight * 0.90
-    X := (A_ScreenWidth/2) - (Width/2)
-    Y := (A_ScreenHeight/2) - (Height/2)
+Width := A_ScreenWidth * WidthPercent / 100
+	       Height := A_ScreenHeight * 0.90
+	       X := (A_ScreenWidth/2) - (Width/2)
+	       Y := (A_ScreenHeight/2) - (Height/2)
 
-    MyWinWait(WinTitle, "", 10)
-    WinRestore %WinTitle%
-    WinMove %WinTitle%, , %X%, %Y%, %Width%, %Height%
+	       MyWinWait(WinTitle, "", 10)
+	       WinRestore %WinTitle%
+	       WinMove %WinTitle%, , %X%, %Y%, %Width%, %Height%
 }
 
 OpenBrowser(URL, WinTitle, WidthPercent=50)
 {
-;    Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-window %URL%
-    Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
-;    Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
+	;    Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-window %URL%
+		Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
+		;    Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
 
-    CenterWindow(WinTitle, WidthPercent)
+		CenterWindow(WinTitle, WidthPercent)
 }
 
 OpenMultiBrowser(WinTitle, WidthPercent=50, URLs*)
 {
-    for index, url in URLs
-    {
-    	if (index = 1)
+	for index, url in URLs
 	{
-	   OpenBrowser(URL, WinTitle, WidthPercent)
+		if (index = 1)
+		{
+			OpenBrowser(URL, WinTitle, WidthPercent)
+		}
+		else
+		{
+			;           Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-tab %URL%
+				Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-tab %URL%
+				;           Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target tab-bg-silent %url%
+		}
 	}
-	else
-	{
-;           Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-tab %URL%
-           Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-tab %URL%
-;           Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target tab-bg-silent %url%
-	}
-    }
 }
 
 MyWinWait(WinTitle, WinText, Time)
 {
-    WinWait %WinTitle%, %WinText%, %Time%
-    if ErrorLevel
-    {
-	String := "Timeout opening the window with "
-	if (WinTitle <> "")
+	WinWait %WinTitle%, %WinText%, %Time%
+		if ErrorLevel
+		{
+String := "Timeout opening the window with "
+		if (WinTitle <> "")
+		{
+			String .= "title " . WinTitle
+				if (WinText <> "")
+				{
+					String .= " and "
+				}
+		}
+	if (WinText <> "")
 	{
-	    String .= "title " . WinTitle
-	    if (WinText <> "")
-	    {
-		String .= " and "
-	    }
-	}
-        if (WinText <> "")
-	{
-	    String .= "text " . WinText
+		String .= "text " . WinText
 	}
 
-        MsgBox %String%.
-        Exit
-    }
+	MsgBox %String%.
+		Exit
+		}
 }
 
 WaitUserInput(WinTitle, WinText, Time)
 {
-    MyWinWait(WinTitle, WinText, Time)
-    WinWaitClose
+	MyWinWait(WinTitle, WinText, Time)
+		WinWaitClose
 }
 
 ; **************
@@ -109,6 +109,7 @@ WaitUserInput(WinTitle, WinText, Time)
 :*:@outlook::txixco@outlook.com
 :*:@txixco::txixco@gmail.com
 :*:@frueda::fruedadev@gmail.com
+:*:@kindle::txixco_kindle@kindle.com
 :*:@paymex::txixco.paymex@gmail.com
 :*:@west::fjrueda@west.com
 :*:@intrado::fjrueda@intrado.com
@@ -118,7 +119,7 @@ WaitUserInput(WinTitle, WinText, Time)
 :*r:#intcel::+5215541904710
 :*:#cel::5541904710
 :*:#bncmr::4772913036789909
-:*:#hsbc::4213166122825791
+:*:#hsbc::021180065117382348
 :*:#sacmex::2437199632010376
 :*:#fctvl::6273181119965742
 :*:#imss::21067302816
@@ -182,6 +183,7 @@ WaitUserInput(WinTitle, WinText, Time)
 ::tia::Thanks in advance and best regards.
 
 ; Emojis
+:*:#besos::`:kissing_heart`:`:kissing_heart`:`:kissing_heart`:
 ;:*::)::🙂
 ;:*:|)::😊
 ;:*:;)::😉
@@ -218,7 +220,7 @@ $Space::
 	return
 
 #^B::
-	OpenBrowser("https://my.bible.com/es-ES/users/txixco/reading-plans/64-reading-gods-story/subscription/597501492", "my.bible.com")
+	OpenBrowser("https://my.bible.com/es-ES/users/txixco/reading-plans/64-reading-gods-story/subscription/597501492", "Mozilla Firefox")
 	return
 
 #!B::
@@ -361,8 +363,8 @@ $Space::
     return
 
 #T::
-    Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Cygwin\Cygwin64 Terminal"
-
+    Run "C:\Data\Links\Utils\Debian.lnk"
+    CenterWindow("~", 70)
     Return
 
 #!T::

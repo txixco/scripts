@@ -6,31 +6,6 @@ from datetime import datetime, timedelta
 
 NUMBER = 600851475143
 
-## Functions
-
-# Print iterations progress
-def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
-    """
-    Call in a loop to create terminal progress bar
-    @params:
-        iteration   - Required  : current iteration (Int)
-        total       - Required  : total iterations (Int)
-        prefix      - Optional  : prefix string (Str)
-        suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent complete (Int)
-        length      - Optional  : character length of bar (Int)
-        fill        - Optional  : bar fill character (Str)
-        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
-    """
-    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
-    filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
-    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
-    # Print New Line on Complete
-    if iteration == total: 
-        print()
-
-# Validate if a number is prime
 def isPrime(n):
     if (n <= 3):
         return (n > 1)
@@ -47,20 +22,14 @@ def isPrime(n):
 
     return True
 
-# Do the trick  
 def maxFactor(n):
-  max = 0
-  if (n%2 == 0):
-      max = 2
+    for i in range(2, n):
+        if (isPrime(i) and (n%i == 0)):
+            return maxFactor(int(n/i))
 
-  for i in range(3, n+1, 2):
-    printProgressBar(i, n, prefix = '', suffix = '', length = 50)
-    if (isPrime(i) and (n%i == 0)):
-      max = i
+    return n
 
-  return max
-
-## Main
+# Main
 
 start = datetime.now()
 print()

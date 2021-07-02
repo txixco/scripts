@@ -2,39 +2,26 @@
 
 from datetime import datetime, timedelta
 
-NUMBER = 600851475143
+DIGITS = 3
 
-def isPrime(n):
-    if (n <= 3):
-        return (n > 1)
+def maxPalindrome(digits):
+    min = 10 ** (digits-1)
+    max = (10 ** digits) - 1
+    maxPal = 0
 
-    if (n % 2 == 0) or n % 3 == 0:
-        return False
+    for i in range(min, max+1):
+        for j in range(i, max+1):
+            num = i * j
+            if ((str(num) == str(num)[::-1]) and (num > maxPal)):
+                ret = (i, j, num)
+                maxPal = num
 
-    i = 5
-    while (i ** 2 <= n):
-        if (n % i == 0) or (n % (i+2) == 0):
-            return False
-        
-        i += 6
+    return ret
 
-    return True
-
-def maxFactor(n):
-    for i in range(2, n):
-        if (isPrime(i) and (n%i == 0)):
-            return maxFactor(int(n/i))
-
-    return n
-
-# Main
-
-start = datetime.now()
 print()
-print(f"Getting the max prime factor for {NUMBER}")
-print(f"Started at: {start:%d-%m-%Y %H:%M:%S}")
-print(f"Max. Factor: {maxFactor(NUMBER)}")
-end = datetime.now()
-print(f"Finished at: {end:%d-%m-%Y %H:%M:%S}")
-print(f"Elapsed time: {end - start} ")
+print(f"Getting the max palindrome, product of two numbers of {DIGITS} digits")
+start = datetime.now()
+(num1, num2, res) = maxPalindrome(DIGITS)
+print(f"The max palindrome number is {num1} x {num2} = {res}")
+print(f"Elapsed time: {datetime.now() - start} ")
 print()

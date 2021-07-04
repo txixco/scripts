@@ -1,15 +1,28 @@
 #!/usr/bin/env python3
 
 from datetime import datetime, timedelta
-from mathutils import primesProduct
+from mathutils import isPrime
 
-N = 100
+N = 10001
+
 
 print()
-print(f"Getting the difference between the sum of squares and the square of the sum of the first {N} numbers")
+print(f"Getting the {N}th prime nummber")
 start = datetime.now()
-sumOfSquares = N * (N + 1) * (2*N + 1)/6
-squareOfSum = ((N+1) * (N // 2)) ** 2
-print(f"The difference is {squareOfSum - sumOfSquares}")
+
+result = 2 if (N == 1) else 0
+
+count = 1
+i = 1
+while not result:
+    i = i+2
+    if (isPrime(i)):
+        count += 1
+    
+    if (count == N):
+        result = i
+        break
+
+print(f"The result is: {result}")
 print(f"Elapsed time: {datetime.now() - start} ")
 print()

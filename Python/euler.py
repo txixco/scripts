@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from datetime import datetime, timedelta
-from math import sqrt
 
 FSUM = 1000
 

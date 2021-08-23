@@ -271,11 +271,6 @@ $Space::
 
     return
 
-#!E::
-    OpenBrowser("https://nx15083.your-storageshare.de/apps/files", "Storage Share", 70)
-
-    return
-
 #F::
     Run "C:\Program Files (x86)\FileSeek\FileSeek.exe"
 
@@ -318,13 +313,11 @@ $Space::
     return
 
 #N::
-;	Run "C:\Program Files (x86)\Vim\vim82\gvim.exe"
     Run "C:\Data\Links\Utils\Neovim.lnk"
 ;   Run "runemacs.exe"
 ;	Run "C:\Programs\emacs\bin\runemacs.exe"
-;	Run notepad++.exe
-;	Run "C:\Users\frueda\AppData\Local\atom\atom.exe"
-	return
+	
+    return
 
 #+N::
 	Run "C:\Programs\emacs\bin\runemacs.exe" "C:\Dropbox\Documents\notas\todo.org", "C:\Dropbox\Documents\notas"
@@ -360,6 +353,20 @@ $Space::
 
 #!R::
     OpenBrowser("https://read.amazon.com/", "Kindle Cloud Reader")
+    return
+
+#S::
+    Input key, L1
+    if (key = "A")
+    {
+    	OpenBrowser("https://nx15083.your-storageshare.de/apps/files", "Storage Share", 70)
+    } else if (key = "C") {
+    	OpenBrowser("https://nx15083.your-storageshare.de/apps/calendar", "Storage Share", 70)
+    } else if (key = "T") {
+    	OpenBrowser("https://nx15083.your-storageshare.de/apps/contacts", "Storage Share", 70)
+    }
+
+
     return
 
 #T::

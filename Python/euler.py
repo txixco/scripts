@@ -1,30 +1,23 @@
 #!/usr/bin/env python3
 
 from datetime import datetime, timedelta
-from mathutils import primesProduct
 
-MAXDIVISOR = 20
+FSUM = 1000
 
-def isMultiple(n):
-    for i in range(3, MAXDIVISOR+1):
-        if (n % i != 0):
-            return False
-
-    return True
-
-def smallest():
-    steps = primesProduct(MAXDIVISOR)
-    i = steps
-    while True:
-        print(f"\rCurrent: {i}", end="\r")
-        if isMultiple(i):
-            return i
-        
-        i += steps
+def triplet(n):
+    for a in range(1, n // 3):
+        for b in range(a+1, (n - a) // 2):
+            c = n - a - b
+            if (a**2 + b**2 == c**2):
+                return (a, b, c)
 
 print()
-print(f"Getting the smallest multiple of all the numbers between 1 and {MAXDIVISOR}")
+print(f"Getting the Pythagorean Triplet for which a+b+c = 1000")
 start = datetime.now()
-print(f"The smallest number is {smallest()}")
+
+(a, b, c) = triplet(FSUM)
+
+print(f"The triplet is {(a, b, c)}")
+print(f"The product is: {a * b * c}")
 print(f"Elapsed time: {datetime.now() - start} ")
 print()

@@ -46,28 +46,26 @@ Width := A_ScreenWidth * WidthPercent / 100
 
 OpenBrowser(URL, WinTitle, WidthPercent=50)
 {
-	;    Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-window %URL%
-		Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
-		;    Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
+    Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
+    ;Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
 
 		CenterWindow(WinTitle, WidthPercent)
 }
 
 OpenMultiBrowser(WinTitle, WidthPercent=50, URLs*)
 {
-	for index, url in URLs
-	{
-		if (index = 1)
-		{
-			OpenBrowser(URL, WinTitle, WidthPercent)
-		}
-		else
-		{
-			;           Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-tab %URL%
-				Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-tab %URL%
-				;           Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target tab-bg-silent %url%
-		}
-	}
+    for index, url in URLs
+    {
+    	if (index = 1)
+    	{
+    	    OpenBrowser(URL, WinTitle, WidthPercent)
+    	}
+    	else
+    	{
+    	    Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-tab %URL%
+    	    ;Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target tab-bg-silent %url%
+    	}
+    }
 }
 
 MyWinWait(WinTitle, WinText, Time)
@@ -282,9 +280,8 @@ $Space::
     return
 
 #H::
-   OpenBrowser("file:///C:/Dropbox/apuntes/salesforce/trailhead_modules.html", "Trailhead Modules")
-
-   return
+    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Data\Downloads\horario.jpg /hide=15 /pos=(271,53)
+    return
 
 #I::
     Send 2528116{Tab}Sg286T32
@@ -310,6 +307,18 @@ $Space::
     RunAs ittrend, contra
     Run "C:\Programs\muCommander\muCommander.exe"
     RunAs
+    return
+
+#!M::
+    Input key, L1
+    if (key = "W")
+    {
+        Run "C:\Users\frueda\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Webex\Webex.lnk"
+    } else if (key = "M")
+    {
+        Run "C:\Users\frueda\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams.lnk"
+    }
+
     return
 
 #N::

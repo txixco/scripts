@@ -304,7 +304,7 @@ $Space::
 
 #+M::
     InputBox contra, , �Contrase�a?, HIDE
-    RunAs ittrend, contra
+    RunAs frueda, contra
     Run "C:\Programs\muCommander\muCommander.exe"
     RunAs
     return

@@ -299,7 +299,7 @@ $Space::
 !v:: Send >
 
 #M::
-	Run "C:\Programs\muCommander\mucommander.exe"
+	Run "C:\Data\Links\muCommander.lnk"
 	return
 
 #+M::

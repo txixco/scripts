@@ -299,7 +299,7 @@ $Space::
 !v:: Send >
 
 #M::
-	Run "C:\Data\Links\muCommander.lnk"
+	Run "%LINKS_PATH%\Utils\muCommander"
 	return
 
 #+M::
@@ -322,7 +322,7 @@ $Space::
     return
 
 #N::
-    Run "C:\Data\Links\Utils\Neovim.lnk"
+    Run "%LINKS_PATH%\Utils\Neovim"
 ;   Run "runemacs.exe"
 ;	Run "C:\Programs\emacs\bin\runemacs.exe"
 	
@@ -379,7 +379,7 @@ $Space::
     return
 
 #T::
-    Run "C:\Data\Links\Utils\Debian.lnk"
+    Run "%LINKS_PATH%\Utils\Debian"
     CenterWindow("~", 70)
     Return
 
@@ -648,7 +648,7 @@ $Space::
 
 #Delete::
 Pause::
-    Run "C:\Data\Links\Utils\MoveIt.lnk"
+    Run "%LINKS_PATH%\Utils\MoveIt"
     return
 
 ; Snapshots

@@ -299,7 +299,7 @@ $Space::
 !v:: Send >
 
 #M::
-	Run "%LINKS_PATH%\Utils\muCommander"
+	Run "%LINKS_PATH%\Utils\muCommander.lnk"
 	return
 
 #+M::
@@ -379,7 +379,7 @@ $Space::
     return
 
 #T::
-    Run "%LINKS_PATH%\Utils\Debian"
+    Run "%LINKS_PATH%\Utils\Debian.lnk"
     CenterWindow("~", 70)
     Return
 
@@ -648,7 +648,7 @@ $Space::
 
 #Delete::
 Pause::
-    Run "%LINKS_PATH%\Utils\MoveIt"
+    Run "%LINKS_PATH%\Utils\MoveIt.lnk"
     return
 
 ; Snapshots

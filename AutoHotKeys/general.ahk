@@ -46,28 +46,26 @@ Width := A_ScreenWidth * WidthPercent / 100
 
 OpenBrowser(URL, WinTitle, WidthPercent=50)
 {
-	;    Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-window %URL%
-		Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
-		;    Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
+    Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
+    ;Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
 
 		CenterWindow(WinTitle, WidthPercent)
 }
 
 OpenMultiBrowser(WinTitle, WidthPercent=50, URLs*)
 {
-	for index, url in URLs
-	{
-		if (index = 1)
-		{
-			OpenBrowser(URL, WinTitle, WidthPercent)
-		}
-		else
-		{
-			;           Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" /new-tab %URL%
-				Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-tab %URL%
-				;           Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target tab-bg-silent %url%
-		}
-	}
+    for index, url in URLs
+    {
+    	if (index = 1)
+    	{
+    	    OpenBrowser(URL, WinTitle, WidthPercent)
+    	}
+    	else
+    	{
+    	    Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-tab %URL%
+    	    ;Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target tab-bg-silent %url%
+    	}
+    }
 }
 
 MyWinWait(WinTitle, WinText, Time)
@@ -271,11 +269,6 @@ $Space::
 
     return
 
-#!E::
-    OpenBrowser("https://nx15083.your-storageshare.de/apps/files", "Storage Share", 70)
-
-    return
-
 #F::
     Run "C:\Program Files (x86)\FileSeek\FileSeek.exe"
 
@@ -287,9 +280,8 @@ $Space::
     return
 
 #H::
-   OpenBrowser("file:///C:/Dropbox/apuntes/salesforce/trailhead_modules.html", "Trailhead Modules")
-
-   return
+    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Data\Downloads\horario.jpg /hide=15 /pos=(271,53)
+    return
 
 #I::
     Send 2528116{Tab}Sg286T32
@@ -307,24 +299,34 @@ $Space::
 !v:: Send >
 
 #M::
-	Run "C:\Programs\muCommander\mucommander.exe"
+	Run "%LINKS_PATH%\Utils\muCommander.lnk"
 	return
 
 #+M::
     InputBox contra, , �Contrase�a?, HIDE
-    RunAs ittrend, contra
+    RunAs frueda, contra
     Run "C:\Programs\muCommander\muCommander.exe"
     RunAs
     return
 
+#!M::
+    Input key, L1
+    if (key = "W")
+    {
+        Run "C:\Users\frueda\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Webex\Webex.lnk"
+    } else if (key = "M")
+    {
+        Run "C:\Users\frueda\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams.lnk"
+    }
+
+    return
+
 #N::
-;	Run "C:\Program Files (x86)\Vim\vim82\gvim.exe"
-    Run "C:\Data\Links\Utils\Neovim.lnk"
+    Run "%LINKS_PATH%\Utils\Neovim"
 ;   Run "runemacs.exe"
 ;	Run "C:\Programs\emacs\bin\runemacs.exe"
-;	Run notepad++.exe
-;	Run "C:\Users\frueda\AppData\Local\atom\atom.exe"
-	return
+	
+    return
 
 #+N::
 	Run "C:\Programs\emacs\bin\runemacs.exe" "C:\Dropbox\Documents\notas\todo.org", "C:\Dropbox\Documents\notas"
@@ -362,8 +364,22 @@ $Space::
     OpenBrowser("https://read.amazon.com/", "Kindle Cloud Reader")
     return
 
+#S::
+    Input key, L1
+    if (key = "A")
+    {
+    	OpenBrowser("https://nx15083.your-storageshare.de/apps/files", "Storage Share", 70)
+    } else if (key = "C") {
+    	OpenBrowser("https://nx15083.your-storageshare.de/apps/calendar", "Storage Share", 70)
+    } else if (key = "T") {
+    	OpenBrowser("https://nx15083.your-storageshare.de/apps/contacts", "Storage Share", 70)
+    }
+
+
+    return
+
 #T::
-    Run "C:\Data\Links\Utils\Debian.lnk"
+    Run "%LINKS_PATH%\Utils\Debian.lnk"
     CenterWindow("~", 70)
     Return
 
@@ -632,7 +648,7 @@ $Space::
 
 #Delete::
 Pause::
-    Run "C:\Data\Links\Utils\MoveIt.lnk"
+    Run "%LINKS_PATH%\Utils\MoveIt.lnk"
     return
 
 ; Snapshots

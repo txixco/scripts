@@ -6,8 +6,6 @@ Script for windows management
 
 from windows_lib import Window
 
-#with Window as wnd:
-#	print(wnd.getName())
-
 wnd = Window()
-print('Name: {}'.format(wnd.getName()))
+print(f'Name: {wnd.getName()}\nGeometry: {wnd.getGeometry()}')
+wnd.setGeometry(10, 10)

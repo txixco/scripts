@@ -303,10 +303,7 @@ $Space::
 	return
 
 #+M::
-    InputBox contra, , �Contrase�a?, HIDE
-    RunAs frueda, contra
-    Run "C:\Programs\muCommander\muCommander.exe"
-    RunAs
+    OpenBrowser("https://www.google.com/maps", "Google Maps", 70)
     return
 
 #!M::
@@ -328,12 +325,13 @@ $Space::
 	
     return
 
-#+N::
+#!N::
 	Run "C:\Programs\emacs\bin\runemacs.exe" "C:\Dropbox\Documents\notas\todo.org", "C:\Dropbox\Documents\notas"
 	return
 
-#!N::
-    OpenBrowser("https://keep.google.com/", "Google Keep")
+#+N::
+;    OpenBrowser("https://keep.google.com/", "Google Keep")
+	Run "%A_Programs%\Joplin.lnk"
 
     return
 

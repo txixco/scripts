@@ -7,13 +7,17 @@ Gets the Spurgeon's sermons index and convert it to md.
 from bs4 import BeautifulSoup
 from requests import request
 
+# Constants
+
+BASE_URL = "http://www.spurgeon.com.mx/"
+
+# Alons-y!
+
 
 def main():
     """
     Main function
     """
-
-    BASE_URL = "http://www.spurgeon.com.mx/"
 
     index_page = request(
         method="get", url="http://www.spurgeon.com.mx/indiceCNPS.html")

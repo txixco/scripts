@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 '''
 Calculates the time since I quit from smoking. It could be a script to
@@ -13,7 +13,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 # The UTC quitting date :-) and now
-quit_date = datetime(2012, 2, 28, 14, 20, 0)
+quit_date = datetime(2012, 3, 9, 14, 20, 0)
 now = datetime.now()
 
 # Go

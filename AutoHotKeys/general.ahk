@@ -27,21 +27,22 @@ Explorer(file)
 		return
 }
 
-CenterWindow(WinTitle, WidthPercent:=50)
+CenterWindow(WinTitle, WidthPercent:=50, ShiftPercent:=0)
 {
 	if (WinTitle = "")
 	{
 		WinGetTitle WinTitle, A
 	}
 
-Width := A_ScreenWidth * WidthPercent / 100
-	       Height := A_ScreenHeight * 0.90
-	       X := (A_ScreenWidth/2) - (Width/2)
-	       Y := (A_ScreenHeight/2) - (Height/2)
+	Width := A_ScreenWidth * WidthPercent / 100
+	Height := A_ScreenHeight * 0.90
+	Shift := A_ScreenWidth * ShiftPercent / 100
+	X := (A_ScreenWidth/2) - (Width/2) - Shift
+	Y := (A_ScreenHeight/2) - (Height/2)
 
-	       MyWinWait(WinTitle, "", 10)
-	       WinRestore %WinTitle%
-	       WinMove %WinTitle%, , %X%, %Y%, %Width%, %Height%
+	MyWinWait(WinTitle, "", 10)
+	WinRestore %WinTitle%
+	WinMove %WinTitle%, , %X%, %Y%, %Width%, %Height%
 }
 
 OpenBrowser(URL, WinTitle, WidthPercent=50)
@@ -280,7 +281,7 @@ $Space::
     return
 
 #H::
-    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Data\Downloads\horario.jpg /hide=15 /pos=(271,53)
+    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Users\frueda\Data\Downloads\horario.jpg /hide=15 /pos=(271,53)
     return
 
 #I::
@@ -320,18 +321,15 @@ $Space::
 
 #N::
     Run "%LINKS_PATH%\Utils\Neovim"
-;   Run "runemacs.exe"
-;	Run "C:\Programs\emacs\bin\runemacs.exe"
-	
     return
 
 #!N::
-	Run "C:\Programs\emacs\bin\runemacs.exe" "C:\Dropbox\Documents\notas\todo.org", "C:\Dropbox\Documents\notas"
-	return
+    Run "C:\Users\frueda\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Emacs-27.1\Emacs.lnk"
+	
+    return
 
 #+N::
-;    OpenBrowser("https://keep.google.com/", "Google Keep")
-	Run "%A_Programs%\Joplin.lnk"
+    Run "%A_Programs%\Joplin.lnk"
 
     return
 
@@ -461,15 +459,35 @@ $Space::
     CenterWindow("")
     return
 
-#^+W::
+#!W::
     CenterWindow("", 70)
+    return
+
+#^!W::
+    CenterWindow("", 70, 10)
     return
 
 ; Open Outlook
 #Z::Run outlook.exe
 
-; New e-mail on Outlook
-#+Z::Run outlook.exe /c ipm.note
+; New items on Outlook
+#+Z::
+    Input key, L1
+    if (key = "M")
+    {
+    	Run outlook.exe /c ipm.note
+    } else if (key = "A") {
+    	Run outlook.exe /c ipm.appointment
+    } else if (key = "T") {
+    	Run outlook.exe /c ipm.task
+    } else if (key = "N") {
+    	Run outlook.exe /c ipm.stickynote
+    } else if (key = "J") {
+    	Run outlook.exe /c ipm.activity
+    }
+
+
+    return
 
 ; Open alternative emails
 #!Z::OpenMultiBrowser("ProtonMail", 70, "https://beta.protonmail.com/u/0/inbox", "https://mail.tutanota.com")

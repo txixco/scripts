@@ -36,7 +36,7 @@ def get_image() -> request:
     return request(method="get", url=url)
 
 
-def set_wallpaper(img_file: str):
+def set_wallpaper(img_file: str) -> None:
     """
     Sets the wallpaper
     """

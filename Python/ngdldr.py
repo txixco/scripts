@@ -16,48 +16,51 @@ from myutils import set_wallpaper
 
 # Options
 PICTURES_DIR = (r"C:\Users\frueda\Data\Pictures\Fondos\NG" if name == "nt"
-                else "/home/txixco/fondos/NG")
+				else "/home/txixco/fondos/NG")
 
 # Functions
 
-
 def get_image() -> request:
-    """
-    Gets the image and returns it as a request.
-    """
+	"""
+	Gets the image and returns it as a request.
+	"""
 
-    print("Downloading the image")
-    page = request(
-        method="get",
-        url="http://photography.nationalgeographic.com/photography/photo-of-the-day"
-    )
+	print("Downloading the image")
+	page = request(
+		method="get",
+		url="http://photography.nationalgeographic.com/photography/photo-of-the-day"
+	)
 
-    soup = BeautifulSoup(page.content, "html.parser")
-    url = soup.find(property="og:image").get("content")
+	soup = BeautifulSoup(page.content, "html.parser")
+	url = soup.find(property="og:image").get("content")
 
-    return request(method="get", url=url)
+	return request(method="get", url=url)
 
 
 def main():
-    """
-    Main function.
-    """
+	"""
+	Main function.
+	"""
 
-    print("Setting the NGEO Wallpaper")
+	print("Setting the NGEO Wallpaper")
 
-    today = datetime.now()
-    img_file = path.join(PICTURES_DIR, f"{today:%Y%m%d}_ngeo.jpg")
-    image = get_image()
+	today = datetime.now()
+	img_file = path.join(PICTURES_DIR, f"{today:%Y%m%d}_ngeo.jpg")
+	image = get_image()
 
-    if not path.isdir(PICTURES_DIR):
-        print(f"The path {PICTURES_DIR} doesn't exist")
-        sys.exit(1)
+	if path.isfile(img_file):
+		print(f"The file already exist, so nothing to do")
+		sys.exit(0)
 
-    with open(img_file, "wb") as file:
-        file.write(image.content)
+	if not path.isdir(PICTURES_DIR):
+		print(f"The path {PICTURES_DIR} doesn't exist")
+		sys.exit(1)
 
-    set_wallpaper(img_file)
+	with open(img_file, "wb") as file:
+		file.write(image.content)
+
+	set_wallpaper(img_file)
 
 
 if __name__ == "__main__":
-    main()
+	main()

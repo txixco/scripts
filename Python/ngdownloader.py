@@ -13,8 +13,8 @@ from bs4 import BeautifulSoup
 from requests import request
 
 # Options
-GET_DESCRIPTION = "yes"
-PICTURES_DIR = "/home/txixco/fondos/NG"
+PICTURES_DIR = (r"C:\Users\frueda\Data\Pictures\Fondos\NG" if name == "nt"
+                else "/home/txixco/fondos/NG")
 
 # Functions
 

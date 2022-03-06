@@ -10,14 +10,14 @@ from downloader import Downloader
 from myutils import set_wallpaper
 
 # The class
-class NGDownloader(Downloader):
+class NASADownloader(Downloader):
     """Class to download the image of the day from National Geographic"""
 
     def get_image(self) -> Response:
         """Gets the image and returns it as a response"""
 
         soup = self.get_soup()
-        img_url = soup.find(property="og:image").get("content")
+        img_url = soup.findAll("enclosure")[0]["url"]
 
         return request(method="get", url=img_url)
 
@@ -25,11 +25,11 @@ class NGDownloader(Downloader):
 def main():
     """Main function"""
 
-    downloader = NGDownloader(
-		"http://photography.nationalgeographic.com/photography/photo-of-the-day", 
-		(r"C:\Users\frueda\Data\Pictures\Fondos\NG" if name == "nt" else "/home/txixco/fondos/NG"),
-		"ng"
-	)
+    downloader = NASADownloader(
+        "https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss", 
+        (r"C:\Users\frueda\Data\Pictures\Fondos\NASA" if name == "nt" else "/home/txixco/fondos/NASA"),
+        "nasa"
+    )
 
     downloader.save_image()
 

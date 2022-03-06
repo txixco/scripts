@@ -2,10 +2,7 @@ from os import name, path, system
 from shutil import copyfile
 
 def set_wallpaper(img_file: str) -> None:
-    """
-    Sets the wallpaper
-    """
-    print("Setting image as wallpaper")
+    """Sets the wallpaper"""
 
     if name == "nt":
         dest_file = path.join(path.dirname(img_file), "ng-potd.jpg")

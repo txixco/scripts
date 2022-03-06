@@ -26,9 +26,9 @@ def main():
     """Main function"""
 
     downloader = NASADownloader(
-        "https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss", 
-        (r"C:\Users\frueda\Data\Pictures\Fondos\NASA" if name == "nt" else "/home/txixco/fondos/NASA"),
-        "nasa"
+        url="https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss", 
+        pictures_dir=(r"C:\Users\frueda\Data\Pictures\Fondos\NASA" if name == "nt" else "/home/txixco/fondos/NASA"),
+        sufix="nasa"
     )
 
     downloader.save_image()

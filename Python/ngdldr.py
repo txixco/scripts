@@ -26,9 +26,9 @@ def main():
     """Main function"""
 
     downloader = NGDownloader(
-		"http://photography.nationalgeographic.com/photography/photo-of-the-day", 
-		(r"C:\Users\frueda\Data\Pictures\Fondos\NG" if name == "nt" else "/home/txixco/fondos/NG"),
-		"ng"
+		url="http://photography.nationalgeographic.com/photography/photo-of-the-day", 
+		pictures_dir=(r"C:\Users\frueda\Data\Pictures\Fondos\NG" if name == "nt" else "/home/txixco/fondos/NG"),
+		sufix="ngeo"
 	)
 
     downloader.save_image()

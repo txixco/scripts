@@ -19,9 +19,7 @@ class Downloader(ABC):
         self.image = self.get_image()
 
     def get_soup(self) -> BeautifulSoup:
-        """
-        Gets the soup for the download page.
-        """
+        """Gets the soup for the download page"""
 
         page = request(
             method="get",
@@ -32,10 +30,10 @@ class Downloader(ABC):
 
     @abstractmethod
     def get_image(sefl) -> request:
-        """Gets the image and returns it as a request."""
+        """Gets the image and returns it as a request"""
 
     def save_image(self) -> None:
-        """Saves the image to disk."""
+        """Saves the image to disk"""
 
         if path.isfile(self.img_file):
             return

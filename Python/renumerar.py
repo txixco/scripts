@@ -6,7 +6,8 @@ Renum the files in a directory
 
 from argparse import ArgumentParser
 from glob import glob
-from os import rename
+from os import rename, getcwd
+from os.path import basename
 
 
 # Auxiliar functions
@@ -18,7 +19,7 @@ def get_args():
     parser = ArgumentParser(
         "Renumerate, given an extension, the files in the current directory")
     parser.add_argument("-s", "--string", dest="string",
-                        required=True, help="the prefix for the file names")
+                        default=basename(getcwd()), help="the prefix for the file names")
     parser.add_argument("-e", "--extension", dest="ext",
                         required=True, help="the extension to renumerate")
     parser.add_argument("-d", "--digits", type=int, dest="digits",

@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 
-from tkinter import *
-import time, ctypes
+from time import sleep
+from ctypes import windll
+from tkinter import Tk
+
+import sys
 
 # Functions
 def center(win) :
@@ -26,9 +29,9 @@ def moveMouse(offsetX, offsetY) :
     """
 
     if (sys.platform == "win32") :
-        ctypes.windll.user32.mouse_event(0x0001, 0, offsetX, offsetY, 0)
-        time.sleep(1)
-        ctypes.windll.user32.mouse_event(0x0001, 0, -offsetX, -offsetY, 0)
+        windll.user32.mouse_event(0x0001, 0, offsetX, offsetY, 0)
+        sleep(1)
+        windll.user32.mouse_event(0x0001, 0, -offsetX, -offsetY, 0)
     else :
         pyautogui.moveRel(offsetX, offsetY)
         time.sleep(1)

@@ -245,29 +245,21 @@ $Space::
     counter++
     return
 
-#!C::
-   Run C:\Programs\Zenity\zenity.exe --calendar --modal
-   return
-
 #+D::
-    OpenBrowser("https://dle.rae.es/?w=diccionario", "Diccionario")
-
-    return
-
-#!D::
-    OpenBrowser("https://www.wordreference.com", "WordReference", 70)
-
-    return
-
-#^D::
-    OpenBrowser("https://www.deepl.com/translator", "DeepL Translate", 70)
-;    Run "C:\Users\frueda\AppData\Local\DeepL\DeepL.exe"
+    Input key, L1
+    if (key = "D")
+    {
+        OpenBrowser("https://dle.rae.es/?w=diccionario", "Diccionario")
+    } else if (key = "W") {
+        OpenBrowser("https://www.wordreference.com", "WordReference", 70)
+    } else if (key = "T") {
+        OpenBrowser("https://www.deepl.com/translator", "DeepL Translate", 70)
+    }
 
     return
 
 #E::
     Run "C:\Programs\Misc\Explorer++.exe"
-
     return
 
 #F::
@@ -486,7 +478,6 @@ $Space::
     	Run outlook.exe /c ipm.activity
     }
 
-
     return
 
 ; Open alternative emails
@@ -658,7 +649,7 @@ $Space::
     clipboard = SubStr(%clipboard%, %InitChar%)
     return
 
-!#Insert::
+#+Insert::
    	InputBox InitChar, Set variables, Number of characters?, , , , , , , , %InitChar%
     return
 
@@ -727,8 +718,29 @@ Pause::
 ; * Multimedia Real *
 ; *******************
 
-^#Insert::
+#^Insert::
 ^Media_Play_Pause:: Run "%A_appdata%\Spotify\Spotify.exe"
+
+#!Insert::
+!Media_Play_Pause:: 
+    Input key, L1
+    if (key = "D")
+    {
+    	Run "%LINKS_PATH%\Spotify\Demon Hunter.url"
+    } else if (key = "F") {
+    	Run "%LINKS_PATH%\Spotify\Electronic Focus.url"
+    } else if (key = "L") {
+    	Run "%LINKS_PATH%\Spotify\Learning Music.url"
+    } else if (key = "M") {
+    	Run "%LINKS_PATH%\Spotify\MercyMe.url"
+    } else if (key = "R") {
+    	Run "%LINKS_PATH%\Spotify\Piano Prayer.url"
+    } else if (key = "P") {
+    	Run "%LINKS_PATH%\Spotify\Techno-praise.url"
+    }
+
+    return
+Run "%A_appdata%\Spotify\Spotify.exe"
 
 !Browser_Home:: Run C:\Programs\qutebrowser\qutebrowser.exe
 

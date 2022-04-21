@@ -7,20 +7,46 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+Function Subfolder(parent As folder, path As String) As folder
+    Dim dest As folder
+    
+    splitted = Split(path, "\")
+    Set dest = parent
+    For Each current In splitted
+        Set dest = dest.Folders(current)
+    Next
+    
+    Set Subfolder = dest
+End Function
 
-Sub RemoveAttachment()
+Sub RemoveAttachment(subject As String, folderPath As String, move As Boolean)
     Dim item As Outlook.MailItem
     Dim attch As Outlook.Attachment
-    Dim parent As folder
+    Dim inbox As folder
+    Dim toBeMoved As Object
     
-    Set parent = Application.Session.GetDefaultFolder(olFolderInbox).parent
-    For Each item In Application.ActiveExplorer.CurrentFolder.Items
-        If item.Subject = "Summary of OnSIP Billing Process" Then
+    Set toBeMoved = CreateObject("System.Collections.ArrayList")
+    
+    Set inbox = Application.Session.GetDefaultFolder(olFolderInbox)
+    For Each item In inbox.Items
+        If item.subject = subject Then
             For Each attch In item.Attachments
                 item.Attachments.Remove 1
             Next
             
-            item.Move parent.Folders("RPA").Folders("OnSIP Billing")
+            item.Save
+            toBeMoved.Add item
         End If
     Next
+    
+    If move Then
+        Set dest = Subfolder(inbox.parent, folderPath)
+        For Each item In toBeMoved
+            item.move dest
+        Next
+    End If
+End Sub
+
+Sub OnSIPReportMacro()
+    RemoveAttachment "Summary of OnSIP Billing Process", "RPA\OnSIP Billing", True
 End Sub

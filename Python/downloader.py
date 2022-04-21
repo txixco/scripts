@@ -1,12 +1,16 @@
+"""Module for the downloader"""
+
+import sys
 from abc import ABC, abstractmethod
 from datetime import datetime
 from os import path
-import sys
 
 from bs4 import BeautifulSoup
 from requests import request
 
+
 class Downloader(ABC):
+    """Abstract class for a downloader"""
 
     def __init__(self, url: str, pictures_dir: str, sufix: str) -> None:
         super().__init__()
@@ -14,7 +18,8 @@ class Downloader(ABC):
         self.pictures_dir = pictures_dir
 
         today = datetime.now()
-        self.img_file = path.join(self.pictures_dir, f"{today:%Y%m%d}_{sufix}.jpg")
+        self.img_file = path.join(
+            self.pictures_dir, f"{today:%Y%m%d}_{sufix}.jpg")
 
         self.image = self.get_image()
 
@@ -29,7 +34,7 @@ class Downloader(ABC):
         return BeautifulSoup(page.content, "html.parser")
 
     @abstractmethod
-    def get_image(sefl) -> request:
+    def get_image(self) -> request:
         """Gets the image and returns it as a request"""
 
     def save_image(self) -> None:
@@ -42,7 +47,7 @@ class Downloader(ABC):
             print(f"The path {self.pictures_dir} doesn't exist")
             sys.exit(1)
 
-        self.image = self.get_image() if not self.image else self.image
+        self.image = self.image or self.get_image()
 
         with open(self.img_file, "wb") as file:
             file.write(self.image.content)

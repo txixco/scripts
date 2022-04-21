@@ -2,12 +2,13 @@
 
 """Gets the photo of the day from National Geographic and sets it as wallpaper"""
 
-import sys
-
 from os import name
-from requests import request, Response
+
+from requests import Response, request
+
 from downloader import Downloader
 from myutils import set_wallpaper
+
 
 # The class
 class NASADownloader(Downloader):
@@ -22,18 +23,22 @@ class NASADownloader(Downloader):
         return request(method="get", url=img_url)
 
 # Allons-y!
+
+
 def main():
     """Main function"""
 
     downloader = NASADownloader(
-        url="https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss", 
-        pictures_dir=(r"C:\Users\frueda\Data\Pictures\Fondos\NASA" if name == "nt" else "/home/txixco/fondos/NASA"),
+        url="https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss",
+        pictures_dir=(r"C:\Data\Pictures\Fondos\NASA" if name ==
+                      "nt" else "/home/txixco/fondos/NASA"),
         sufix="nasa"
     )
 
     downloader.save_image()
 
     set_wallpaper(downloader.img_file)
+
 
 if __name__ == "__main__":
     main()

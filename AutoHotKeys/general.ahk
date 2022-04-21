@@ -349,7 +349,7 @@ $Space::
     return
 
 #!R::
-    OpenBrowser("https://read.amazon.com/", "Kindle Cloud Reader")
+    OpenBrowser("https://read.amazon.com/", "Kindle")
     return
 
 #S::

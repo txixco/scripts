@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 
+"""Module to define the class Card and its relateds"""
+
 from dataclasses import dataclass
 from enum import Enum, auto
 
 
 class Rank(Enum):
+    """Class to enum the ranks of the cards"""
+    ACE = 14
     TWO = 2
     THREE = 3
     FOUR = 4
@@ -17,17 +21,17 @@ class Rank(Enum):
     JACK = 11
     QUEEN = 12
     KING = 13
-    ACE = 14
 
     def __str__(self) -> str:
         return self.name.capitalize()
 
 
 class Suit(Enum):
-    DIAMONDS = auto
-    CLUBS = auto
-    HEARTS = auto
-    SPADES = auto
+    """Class to enum the suits in the cards"""
+    DIAMONDS = auto()
+    CLUBS = auto()
+    HEARTS = auto()
+    SPADES = auto()
 
     def __str__(self) -> str:
         return self.name.capitalize()
@@ -35,6 +39,7 @@ class Suit(Enum):
 
 @dataclass
 class Card:
+    """Class to store a card information"""
     rank: Rank
     suit: Suit
 
@@ -52,4 +57,5 @@ class Card:
 
     @property
     def value(self) -> int:
+        """Property to get the value of the card"""
         return self.rank.value

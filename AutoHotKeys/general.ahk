@@ -303,10 +303,10 @@ $Space::
     Input key, L1
     if (key = "W")
     {
-        Run "C:\Users\frueda\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Webex\Webex.lnk"
+        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Webex\Webex.lnk"
     } else if (key = "M")
     {
-        Run "C:\Users\frueda\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams.lnk"
+        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Teams.lnk"
     }
 
     return

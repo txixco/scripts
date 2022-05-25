@@ -23,7 +23,7 @@ class Player:
     def discard(self) -> Card:
         return self.hand.pop(0)
 
-    def take(self, new_cards: object) -> None:
+    def draw(self, new_cards: object) -> None:
         if isinstance(new_cards, list):
             for card in new_cards:
                 if not isinstance(card, Card):

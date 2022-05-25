@@ -24,6 +24,13 @@ class Deck:
         """Shuffle the deck"""
         return shuffle(self.all_cards)
 
-    def deal(self) -> Card:
-        """Deal a card from the deck"""
+    def draw(self) -> Card:
+        """Draw a card from the deck"""
         return self.all_cards.pop()
+    
+    def deal(self, players: list[str]) -> None:
+        """Deal the cards"""
+
+        while len(self.all_cards) > 0:
+            for player in players:
+                player.draw(self.draw())

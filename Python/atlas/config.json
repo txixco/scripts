@@ -1,0 +1,29 @@
+{
+    "pdf_path": "C:\\Data\\Downloads\\plantilla",
+    "template": "Carta Remesa - Template.pdf",
+    "target": "Carta Remesa.pdf",
+    "ailments": [ "Síndrome Post Flebítico" ],
+    "holder": "Rueda Clausell Francisco José",
+    "data": {
+        "Text2": "@date",
+        "Afectado": "@ask:Afectado:Rueda Clausell Francisco José",
+        "Parentes co": "@ask:Parentesco:Titular",
+        "Materno": "@ask:CURP (Afectado):RUCF731010HNEDLR09",
+        "Padecimiento": "@choose:ailments",
+        "Núm ero de s inies tro": "@ask:Número de siniestro"
+    },
+    "checks": {
+        "accident_type": { 
+            "I": "Inicial", 
+            "C": "Complemento" 
+        },
+       "procedure_type": {
+            "R": "Reembolso",
+            "S": "Solicitud de anticipo",
+            "C": "Comprobación de anticipo",
+            "P": "Carta pase",
+            "V": "Valoración",
+            "I": "Información adicional"
+       }
+    }
+}

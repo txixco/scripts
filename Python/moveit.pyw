@@ -12,8 +12,8 @@ OFFSET_X = 100
 OFFSET_Y = 100
 WAIT = 60
 SECS = "second" + ("" if (WAIT == 1) else "s")
-MOVING = "Moving the mouse every {} {}".format(WAIT, SECS)
-    
+MOVING = f"Moving the mouse every {WAIT} {SECS}"   
+
 # Defining the dialog
 root = winutils.getRoot("Move It", "300x50", "mouse-move.ico")
 root.resizable(width=False, height=False)

@@ -108,8 +108,11 @@ WaitUserInput(WinTitle, WinText, Time)
 :*:@outlook::txixco@outlook.com
 :*:@txixco::txixco@gmail.com
 :*:@frueda::fruedadev@gmail.com
+
 :*:@kindle::txixco_kindle@kindle.com
 :*:@paymex::txixco.paymex@gmail.com
+:*:@plumas::frueda{+}plumas@aleeas.com
+
 :*:@west::fjrueda@west.com
 :*:@intrado::fjrueda@intrado.com
 :*:@autobot::automationbot@west.com
@@ -236,11 +239,23 @@ $Space::
     Send %Comment%
     return
 
+#+C::
+    Input key, L1
+    if (key = "V")
+    {
+        Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Data\Downloads\vi-vim-cheat-sheet.gif /hide=15 /pos=(271,53)
+    } else if (key = ".") {
+        MsgBox "Tecla todavía no implementada"
+    }
+
+    return
+
+
 #^C::
     counter = 1
     return
 
-#+C::
+#!C::
     Send [%counter%]
     counter++
     return
@@ -262,6 +277,10 @@ $Space::
     Run "C:\Programs\Misc\Explorer++.exe"
     return
 
+#+E::
+    Run "%A_ProgramFiles%\Double Commander\doublecmd.exe"
+    return
+
 #F::
     Run "C:\Program Files (x86)\FileSeek\FileSeek.exe"
 
@@ -273,7 +292,8 @@ $Space::
     return
 
 #H::
-    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Users\frueda\Data\Downloads\horario.jpg /hide=15 /pos=(271,53)
+    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Data\Downloads\horario.jpg /hide=15 /pos=(271,53)
+
     return
 
 #I::
@@ -295,11 +315,11 @@ $Space::
 	Run "%LINKS_PATH%\Utils\muCommander.lnk"
 	return
 
-#+M::
+#!M::
     OpenBrowser("https://www.google.com/maps", "Google Maps", 70)
     return
 
-#!M::
+#+M::
     Input key, L1
     if (key = "W")
     {
@@ -307,6 +327,12 @@ $Space::
     } else if (key = "M")
     {
         Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Teams.lnk"
+    } else if (key = "S")
+    {
+        Run "C:\Users\frueda\AppData\Local\Programs\signal-desktop\Signal.exe"
+    } else if (key = "K")
+    {
+        Run "C:\Program Files (x86)\Microsoft\Skype for Desktop\Skype.exe"
     }
 
     return
@@ -316,8 +342,8 @@ $Space::
     return
 
 #!N::
-    Run "C:\Users\frueda\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Emacs-27.1\Emacs.lnk"
-	
+    Run "%A_AppData%\Microsoft\Windows\Start Menu\Programs\Emacs-28.1\Emacs.lnk"
+
     return
 
 #+N::
@@ -352,7 +378,11 @@ $Space::
     OpenBrowser("https://read.amazon.com/", "Kindle")
     return
 
-#S::
+#+R::
+    Run "%A_appdata%\..\Local\SumatraPDF\SumatraPDF.exe" %clipboard%
+    return
+
+#+S::
     Input key, L1
     if (key = "A")
     {
@@ -492,9 +522,10 @@ $Space::
 !0:: Send 000
 
 ; Unicode characters
-<^>!4:: Send €
+;<^>!4:: Send €
 <^>!`:: Send º
 <^>!+`:: Send ª
+<^>!.:: Send …
 
 ; Enclose between parentheses
 #8::
@@ -649,7 +680,7 @@ $Space::
     clipboard = SubStr(%clipboard%, %InitChar%)
     return
 
-#+Insert::
+#!Insert::
    	InputBox InitChar, Set variables, Number of characters?, , , , , , , , %InitChar%
     return
 
@@ -719,10 +750,10 @@ Pause::
 ; *******************
 
 #^Insert::
-^Media_Play_Pause:: Run "%A_appdata%\Spotify\Spotify.exe"
+^Media_Play_Pause:: Run "%A_AppData%\Spotify\Spotify.exe"
 
-#!Insert::
-!Media_Play_Pause:: 
+#+Insert::
++Media_Play_Pause::
     Input key, L1
     if (key = "D")
     {
@@ -740,7 +771,6 @@ Pause::
     }
 
     return
-Run "%A_appdata%\Spotify\Spotify.exe"
 
 !Browser_Home:: Run C:\Programs\qutebrowser\qutebrowser.exe
 
@@ -1014,3 +1044,5 @@ MoveWindow:
 ;#include programacion.ahk
 ;#include VirtuaWin.ahk
 ;#include sql.ahk
+
+#include %A_ScriptDir%/audio.ahk

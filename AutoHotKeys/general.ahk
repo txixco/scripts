@@ -538,13 +538,17 @@ $Space::
 	return
 
 ; Window dependent help
+#IfWinActive, WebStorm
 #F1::
-    IfWinActive WebStorm
-    {
-        Run "C:\Dropbox\My Ebooks\WebStorm_ReferenceCard_Windows_Linux.pdf"
-    }
+    Run "C:\Dropbox\My Ebooks\WebStorm_ReferenceCard_Windows_Linux.pdf"
+    Return
+#IfWinActive
 
-    return
+#IfWinActive, Double Commander
+#F1::
+    OpenBrowser("https://doublecmd.github.io/doc/en/shortcuts.html", "DC - Shortcuts")
+    Return
+#IfWinActive
 
 ; Show selection length
 #F2::

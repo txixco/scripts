@@ -6,16 +6,23 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 #Space::
-	toggle:=!toggle ; This toggles the variable between true/false
-	if toggle
+	EnvAdd device, 1
+	device:=Mod(device, 3)
+
+	Switch device
 	{
+	    Case 0:
 		Run C:\Programs\NirCmd\nircmdc setdefaultsounddevice "Speakers"
 		soundToggleBox("Speakers")
-	}
-	else
-	{
+		return
+	    Case 1:
+		Run C:\Programs\NirCmd\nircmdc setdefaultsounddevice "Headphones"
+		soundToggleBox("Headphones")
+		return
+	    Case 2:
 		Run C:\Programs\NirCmd\nircmdc setdefaultsounddevice "Headset Earphone"
 		soundToggleBox("Headset Earphone")
+		return
 	}
 Return
 

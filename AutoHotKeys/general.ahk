@@ -176,7 +176,7 @@ WaitUserInput(WinTitle, WinText, Time)
    clipboard = %bak%
    return
 
-::gus::Gracias por adelantado y un saludo,
+::gus::Gracias por adelantado y un saludo.
 ::sld::
    SendInput Un saludo.{Enter}
    return
@@ -546,7 +546,7 @@ $Space::
 
 #IfWinActive, Double Commander
 #F1::
-    OpenBrowser("https://doublecmd.github.io/doc/en/shortcuts.html", "DC - Shortcuts")
+    OpenBrowser("https://doublecmd.github.io/doc/en/shortcuts.html", "DC - Shortcuts", 60)
     Return
 #IfWinActive
 

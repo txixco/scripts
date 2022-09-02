@@ -1,14 +1,22 @@
 module Maths where
 
 isDivisible :: Int -> Int -> Bool
+isDivisible 0 _ = True
 isDivisible _ 1 = True
 isDivisible n m = n `mod` m == 0
 
---isPrime :: Int -> Bool
---isPrime n = and (isDivisible n n) True
-
 factors :: Int -> [Int]
 factors n = [x | x <- [1..n-1], isDivisible n x]
+
+sqrtFactors :: Int -> [Int]
+sqrtFactors n = [x | x <- [2..(round (sqrt (fromIntegral n)))], isDivisible n x]
+
+isPrime :: Int -> Bool
+isPrime 1 = False
+isPrime n = length (sqrtFactors n) == 0
+
+primeFactors :: Int -> [Int]
+primeFactors n = [x | x <- sqrtFactors n, isPrime x]
 
 fac :: Int -> Int
 fac 1 = 1

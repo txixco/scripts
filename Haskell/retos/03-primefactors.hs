@@ -1,7 +1,6 @@
 import Maths
 
-primeFactors :: Int -> [Int]
-primeFactors n = [x | x <- factors n, ]
 main :: IO ()
-main = go
-    
+main = do
+    print (primeFactors 600851475143)
+    print ("The solution is: " ++ show (maximum (primeFactors 600851475143)))

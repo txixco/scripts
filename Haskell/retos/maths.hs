@@ -18,6 +18,9 @@ isPrime n = length (sqrtFactors n) == 0
 primeFactors :: Int -> [Int]
 primeFactors n = [x | x <- sqrtFactors n, isPrime x]
 
+isPalindrome :: Int -> Bool
+isPalindrome n = show n == reverse (show n)
+
 fac :: Int -> Int
 fac 1 = 1
 fac n = n * fac (n-1)

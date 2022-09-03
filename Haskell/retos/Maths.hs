@@ -5,6 +5,9 @@ isDivisible 0 _ = True
 isDivisible _ 1 = True
 isDivisible n m = n `mod` m == 0
 
+isEven :: Int -> Bool
+isEven n = isDivisible n 2
+
 factors :: Int -> [Int]
 factors n = [x | x <- [1..n-1], isDivisible n x]
 

@@ -12,5 +12,4 @@ smallest n
     | otherwise          = smallest (n+1)
 
 main :: IO()
-main = do
-    print (smallest 1)
+main = print (smallest 1)

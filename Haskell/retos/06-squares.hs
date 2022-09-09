@@ -5,5 +5,4 @@ smsqr :: Int -> Int
 smsqr n = (sum [1..n])^2
 
 main :: IO()
-main = do
-    print("El resultado es: " ++ show (smsqr 100 - sqrsm 100))
+main = print("El resultado es: " ++ show (smsqr 100 - sqrsm 100))

@@ -1,6 +1,5 @@
 from typing import List
-from BlackJack.card import Rank
-from card import Card
+from card import Card, Rank
 
 class Hand:
     cards: List[Card]

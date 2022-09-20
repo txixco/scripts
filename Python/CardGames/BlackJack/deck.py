@@ -21,14 +21,14 @@ class Deck:
         return len(self.deck)
 
     def __str__(self) -> str:
-        all_cards = [str(card) for card in self.deck]
-        all_cards = "\n\t".join(all_cards)
-        return f"The deck has: \n\t{all_cards}"
+        deck = [str(card) for card in self.deck]
+        deck = "\n\t".join(deck)
+        return f"The deck has: \n\t{deck}"
 
     def shuffle(self) -> None:
         """Shuffle the deck"""
-        return shuffle(self.all_cards)
+        return shuffle(self.deck)
 
     def deal(self) -> Card:
         """Deal a card from the deck"""
-        return self.all_cards.pop()
+        return self.deck.pop()

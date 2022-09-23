@@ -10,5 +10,4 @@ below :: Int -> [Int]
 below n = deduplicate [x | x <- (multiples 3 n) ++ (multiples 5 n)]
 
 main :: IO ()
-main = do
-    print (sum (below 1000))
+main = print (sum (below 1000))

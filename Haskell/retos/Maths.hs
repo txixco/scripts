@@ -22,7 +22,10 @@ isPrime 1 = False
 isPrime n = length (sqrtFactors n) == 0
 
 primes :: [Int]
-primes = 2 : [ x | x <- [2..], isOdd x, isPrime x]
+primes = sieve [2..]
+
+sieve :: [Int] -> [Int]
+sieve (p:xs) = p : sieve [x | x <- xs, mod x p /= 0]
 
 primeFactors :: Int -> [Int]
 primeFactors n = [x | x <- sqrtFactors n, isPrime x]

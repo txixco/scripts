@@ -50,7 +50,7 @@ OpenBrowser(URL, WinTitle, WidthPercent=50)
     Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
     ;Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
 
-		CenterWindow(WinTitle, WidthPercent)
+    CenterWindow(WinTitle, WidthPercent)
 }
 
 OpenMultiBrowser(WinTitle, WidthPercent=50, URLs*)
@@ -776,8 +776,10 @@ Pause::
 
     return
 
-!Browser_Home:: Run C:\Programs\qutebrowser\qutebrowser.exe
+#!Home::
+!Browser_Home:: Run C:\Program Files\qutebrowser\qutebrowser.exe
 
+#^Home::
 ^Browser_Home:: OpenBrowser(clipboard, "qutebrowser")
 
 ; ***************************

@@ -1,18 +1,13 @@
-AnchorLayoutExample:
-
-<AnchorLayoutExample>:
-    Button: 
-        text: "A"
+BoxLayoutExample:
 
 <BoxLayoutExample>:
     orientation: "horizontal"
 
     Button:
         text: "A"
-        
-        size_hint: 0.5, 0.5
+        size_hint: .5, .5
         pos_hint: { "center_y": .5 }
-        
+
     BoxLayout:
         orientation: "vertical"
         spacing: "10dp"
@@ -26,10 +21,14 @@ AnchorLayoutExample:
         Button:
             text: "B3"
 
+        Button:
+            text: "B4"
+
     Label:
         text: "C"
 
 <MainWidget>:
     Button:
         text: "Hello"
-        size: 400,200
+        size: "100dp", "80dp"
+        pos: "100dp", "200dp"

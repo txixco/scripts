@@ -4,6 +4,7 @@
 Moves the mouse pointer every WAIT seconds.
 '''
 
+
 from tkinter import *
 import time, pyautogui, winutils
 
@@ -27,9 +28,9 @@ Label(root, textvariable=countdown).pack()
 # Let's go
 pyautogui.FAILSAFE = True
 
-while True :
-    for remains in range(WAIT, 0, -1) :
-        countdown.set("The next movement will be on {} {}...".format(remains, SECS))
+while True:
+    for remains in range(WAIT, 0, -1):
+        countdown.set(f"The next movement will be on {remains} {SECS}...")
         root.update()
         time.sleep(1)
 

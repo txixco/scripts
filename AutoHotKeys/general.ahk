@@ -324,16 +324,22 @@ $Space::
     if (key = "W")
     {
         Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Webex\Webex.lnk"
+        title = Webex
     } else if (key = "M")
     {
         Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Teams.lnk"
+        title = Microsoft Teams
     } else if (key = "S")
     {
         Run "C:\Users\frueda\AppData\Local\Programs\signal-desktop\Signal.exe"
+        title = Signal
     } else if (key = "K")
     {
         Run "C:\Program Files (x86)\Microsoft\Skype for Desktop\Skype.exe"
+        title = Skype
     }
+
+    CenterWindow(title, 70)
 
     return
 
@@ -759,7 +765,10 @@ Pause::
 #+Insert::
 +Media_Play_Pause::
     Input key, L1
-    if (key = "D")
+    if (key = "C")
+    {
+    	Run "%LINKS_PATH%\Spotify\Christian Instrumental Chill.url"
+    } else if (key = "D")
     {
     	Run "%LINKS_PATH%\Spotify\Demon Hunter.url"
     } else if (key = "F") {
@@ -768,9 +777,11 @@ Pause::
     	Run "%LINKS_PATH%\Spotify\Learning Music.url"
     } else if (key = "M") {
     	Run "%LINKS_PATH%\Spotify\MercyMe.url"
-    } else if (key = "R") {
-    	Run "%LINKS_PATH%\Spotify\Piano Prayer.url"
     } else if (key = "P") {
+    	Run "%LINKS_PATH%\Spotify\Piano Prayer.url"
+    } else if (key = "R") {
+    	Run "%LINKS_PATH%\Spotify\Rolones de la chorch XD.url"
+    } else if (key = "T") {
     	Run "%LINKS_PATH%\Spotify\Techno-praise.url"
     }
 

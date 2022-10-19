@@ -150,6 +150,7 @@ WaitUserInput(WinTitle, WinText, Time)
 
 :*:fjr::Francisco J. Rueda
 :*:yw::you're welcome
+:*:np::no problem
 :*:jf::Jean-François
 :*:botw::Breath of the Wild
 

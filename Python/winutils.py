@@ -21,7 +21,7 @@ def center(win) :
     y = h/2 - size[1]/2
     win.geometry("%dx%d+%d+%d" % (size + (x, y)))
 
-def moveMouse(offsetX, offsetY) :
+def move_mouse(offsetX, offsetY) :
     """
     Move the mouse the indicated offset
     :param offsetX: The X offset to move
@@ -37,7 +37,7 @@ def moveMouse(offsetX, offsetY) :
         time.sleep(1)
         pyautogui.moveRel(-offsetX, -offsetY)
 
-def getRoot(title, geometry="", iconBitmap="") :
+def get_root(title, geometry="", icon_bitmap="") :
     """
     Gets a Tk window, with some attribute values
     :param title: The window title
@@ -51,7 +51,7 @@ def getRoot(title, geometry="", iconBitmap="") :
     if geometry != "" :
         root.geometry(geometry)
 
-    if iconBitmap != "" :
-        root.iconbitmap(iconBitmap)
+    if icon_bitmap != "" :
+        root.iconbitmap(icon_bitmap)
 
     return root

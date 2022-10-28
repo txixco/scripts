@@ -14,7 +14,7 @@ from kivy.config import Config
 Config.set("graphics", "width", "300")
 Config.set("graphics", "height", "50")
 Config.set("graphics", "resizable", "False")
-Config.set("kivy", "window_icon", "mouse-move.png")
+Config.set("kivy", "window_icon", "moveit.png")
 
 from kivy.core.window import Window
 Window.clearcolor = (0.9, 0.9, 0.9)

@@ -8,8 +8,7 @@ from kivy import platform
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
-from kivy.properties import NumericProperty
-from kivy.properties import Clock
+from kivy.properties import NumericProperty, Clock
 from kivy.graphics.context_instructions import Color
 from kivy.graphics.vertex_instructions import Line
 

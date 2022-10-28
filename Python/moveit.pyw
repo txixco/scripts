@@ -4,6 +4,10 @@
 Moves the mouse pointer every WAIT seconds.
 '''
 
+
+import os
+os.environ["KIVY_NO_CONSOLELOG"] = "1"
+
 from winutils import move_mouse
 
 from kivy.config import Config

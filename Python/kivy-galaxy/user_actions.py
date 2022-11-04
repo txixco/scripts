@@ -34,5 +34,13 @@ def on_touch_up(self, touch):
     self.current_speed_x = 0
 
 def on_menu_button_pressed(self):
+    if self.state_game_over:
+        self.sound_restart.play()
+    else:
+        self.sound_begin.play()
+
+    self.sound_music1.play()
+
+    self.reset_game()
     self.state_game_has_started = True
     self.menu_widget.opacity = 0

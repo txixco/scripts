@@ -27,6 +27,18 @@ Explorer(file)
 		return
 }
 
+ShowHotkeys(FileName)
+{
+    FileRead MyText, %FileName%
+
+    Gui -Caption +AlwaysOnTop +Disabled -SysMenu +Owner
+    Gui Color, AAAAAA
+    Gui +LastFound
+    WinSet Transparent, 220
+    Gui Add, Text, , %MyText%
+    Gui Show, NoActivate, Hotkeys for Spotify
+}
+
 CenterWindow(WinTitle, WidthPercent:=50, ShiftPercent:=0)
 {
 	if (WinTitle = "")
@@ -47,8 +59,8 @@ CenterWindow(WinTitle, WidthPercent:=50, ShiftPercent:=0)
 
 OpenBrowser(URL, WinTitle, WidthPercent=50)
 {
-    ;Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL
-    Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
+    Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
+    ;Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
 
     CenterWindow(WinTitle, WidthPercent)
 }
@@ -457,16 +469,6 @@ $Space::
 
     ControlClick Connect, Cisco AnyConnect Secure Mobility Client
 
-;    WaitUserInput("Cisco AnyConnect | ", "", 30)
-;    MyWinWait("Cisco AnyConnect | ", "", 30)
-;    Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Entrust\IdentityGuard Soft Token"
-;    MyWinWait("Entrust IdentityGuard Token", "West-frueda", 30)
-;    ControlClick X267 Y127, Entrust IdentityGuard Token
-;    Sleep 1000
-;    Send !{F4}
-;    Sleep 1000
-;    Send +{Insert}{Enter}
-
     return
 
 #W::
@@ -501,20 +503,22 @@ $Space::
 
 ; New items on Outlook
 #+Z::
+    ShowHotkeys( A_ScriptDir "\outlook.htk")
     Input key, L1
-    if (key = "M")
+    if (key = "A")
     {
-    	Run outlook.exe /c ipm.note
-    } else if (key = "A") {
     	Run outlook.exe /c ipm.appointment
-    } else if (key = "T") {
-    	Run outlook.exe /c ipm.task
-    } else if (key = "N") {
-    	Run outlook.exe /c ipm.stickynote
     } else if (key = "J") {
     	Run outlook.exe /c ipm.activity
+    } else if (key = "M") {
+    	Run outlook.exe /c ipm.note
+    } else if (key = "N") {
+    	Run outlook.exe /c ipm.stickynote
+    } else if (key = "T") {
+    	Run outlook.exe /c ipm.task
     }
 
+    Gui Destroy
     return
 
 ; Open alternative emails
@@ -765,6 +769,7 @@ Pause::
 
 #+Insert::
 +Media_Play_Pause::
+    ShowHotkeys( A_ScriptDir "\spotify.htk")
     Input key, L1
     if (key = "C")
     {
@@ -786,6 +791,7 @@ Pause::
     	Run "%LINKS_PATH%\Spotify\Techno-praise.url"
     }
 
+    Gui Destroy
     return
 
 #!Home::

@@ -57,10 +57,16 @@ CenterWindow(WinTitle, WidthPercent:=50, ShiftPercent:=0)
 	WinMove %WinTitle%, , %X%, %Y%, %Width%, %Height%
 }
 
-OpenBrowser(URL, WinTitle, WidthPercent=50)
+OpenBrowser(URL, WinTitle, WidthPercent=50, Alternative=False)
 {
-    Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
-    ;Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
+    if (Alternative)
+    {
+        Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
+    }
+    else
+    {
+        Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
+    }
 
     CenterWindow(WinTitle, WidthPercent)
 }
@@ -402,6 +408,7 @@ $Space::
     return
 
 #+S::
+    ShowHotkeys(A_ScriptDir "\storageshare.htk")
     Input key, L1
     if (key = "A")
     {
@@ -413,6 +420,7 @@ $Space::
     }
 
 
+    Gui Destroy
     return
 
 #T::
@@ -503,7 +511,7 @@ $Space::
 
 ; New items on Outlook
 #+Z::
-    ShowHotkeys( A_ScriptDir "\outlook.htk")
+    ShowHotkeys(A_ScriptDir "\outlook.htk")
     Input key, L1
     if (key = "A")
     {
@@ -769,7 +777,7 @@ Pause::
 
 #+Insert::
 +Media_Play_Pause::
-    ShowHotkeys( A_ScriptDir "\spotify.htk")
+    ShowHotkeys(A_ScriptDir "\spotify.htk")
     Input key, L1
     if (key = "C")
     {
@@ -798,7 +806,7 @@ Pause::
 !Browser_Home:: Run C:\Program Files\qutebrowser\qutebrowser.exe
 
 #^Home::
-^Browser_Home:: OpenBrowser(clipboard, "qutebrowser")
+^Browser_Home:: Run C:\Program Files\qutebrowser\qutebrowser.exe %clipboard%
 
 ; ***************************
 ; * Hotkeys - Geometry Mode *

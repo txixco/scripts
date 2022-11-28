@@ -7,7 +7,7 @@ then
     tmux split-window -h -c Code/UIPath -p 90
     tmux split-window -v -c Code/UIPath/application-libraries
  
-    tmux select-window -t $1:dunning-letters
+    tmux select-panel -t1
 fi
 
 tmux attach -t $1

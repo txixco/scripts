@@ -17,7 +17,7 @@ Config.set("graphics", "resizable", "False")
 Config.set("kivy", "window_icon", "moveit.png")
 
 from kivy.core.window import Window
-Window.clearcolor = (0.9, 0.9, 0.9)
+Window.clearcolor = (0.4, 0.4, 0.4)
 
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
@@ -46,7 +46,7 @@ class MainBox(BoxLayout):
 
     def update(self):
         if self.remains >= 0:
-            self.countdown = str(self.remains)
+            self.countdown = str(self.remains) if self.remains > 0 else "Move it!"
             self.remains -= 1
         else:
             move_mouse(OFFSET_X, OFFSET_Y)

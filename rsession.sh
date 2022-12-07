@@ -7,7 +7,7 @@ then
     tmux split-window -h -c Code/UIPath -p 90
     tmux split-window -v -c Code/UIPath/application-libraries
  
-    tmux select-panel -t1
+    tmux select-pane -t 2
 fi
 
 tmux attach -t $1

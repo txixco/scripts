@@ -1,13 +1,9 @@
-import qualified Data.Set as Set
+import Data.List (union)
 
-deduplicate :: Ord a => [a] -> [a]
-deduplicate xs = Set.elems (Set.fromList xs)
+nums = union [3, 6..999] [5, 10..999]
 
-multiples :: Int -> Int -> [Int]
-multiples n m = [x | x <- [1..m-1], x `mod` n == 0]
-
-below :: Int -> [Int]
-below n = deduplicate [x | x <- (multiples 3 n) ++ (multiples 5 n)]
+solve :: Int
+solve = sum nums
 
 main :: IO ()
-main = print (sum (below 1000))
+main = print solve

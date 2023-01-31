@@ -77,9 +77,9 @@ OpenMultiBrowser(WinTitle, WidthPercent=50, URLs*)
 MyWinWait(WinTitle, WinText, Time)
 {
 	WinWait %WinTitle%, %WinText%, %Time%
-		if ErrorLevel
-		{
-String := "Timeout opening the window with "
+	if ErrorLevel
+	{
+        String := "Timeout opening the window with "
 		if (WinTitle <> "")
 		{
 			String .= "title " . WinTitle
@@ -87,15 +87,16 @@ String := "Timeout opening the window with "
 				{
 					String .= " and "
 				}
-		}
-	if (WinText <> "")
-	{
-		String .= "text " . WinText
-	}
+    	}
 
-	MsgBox %String%.
-		Exit
-		}
+	    if (WinText <> "")
+	    {
+		    String .= "text " . WinText
+    	}
+
+	    MsgBox %String%.
+	    Exit
+    }
 }
 
 WaitUserInput(WinTitle, WinText, Time)

@@ -242,11 +242,11 @@ $Space::
     Input key, L1
     if (key = "W")
     {
-        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Webex\Webex.lnk"
+        Run "%A_ProgramsCommon%\Webex\Webex.lnk"
         title = Webex
     } else if (key = "M")
     {
-        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Teams.lnk"
+        Run "%A_ProgramsCommon%\Microsoft Teams.lnk"
         title = Microsoft Teams
     } else if (key = "S")
     {
@@ -366,22 +366,33 @@ $Space::
 	return
 
 #U::
-    Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\UiPath\UiPath Studio"
+    Run "%A_ProgramsCommon%\UiPath\UiPath Studio"
     return
 
 #!V::
-    Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Cisco\Cisco AnyConnect Secure Mobility Client\Cisco AnyConnect Secure Mobility Client"
+    Run "%A_ProgramsCommon%\Cisco\Cisco AnyConnect Secure Mobility Client\Cisco AnyConnect Secure Mobility Client"
 
     return
 
 #^V::
-    Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Cisco\Cisco AnyConnect Secure Mobility Client\Cisco AnyConnect Secure Mobility Client"
+    Run "%A_ProgramsCommon%\Cisco\Cisco AnyConnect Secure Mobility Client\Cisco AnyConnect Secure Mobility Client"
     MyWinWait("Cisco AnyConnect Secure Mobility Client", "", 30)
     ControlClick Disconnect, Cisco AnyConnect Secure Mobility Client
     if !ErrorLevel
 	Exit
 
     ControlClick Connect, Cisco AnyConnect Secure Mobility Client
+    MyWinWait("Cisco AnyConnect", "Answer", 10)
+
+    Run "%A_ProgramsCommon%\Entrust\IdentityGuard Soft Token.lnk"
+    MyWinWait("Entrust IdentityGuard Token", "Identities", 10)
+    ControlClick x260 y143, Entrust IdentityGuard Token, Identities
+    ClipWait 2
+
+    WinActivate Cisco AnyConnect, Answer
+    Send +{Insert}{Enter}
+
+    WinClose Entrust IdentityGuard Token
 
     return
 

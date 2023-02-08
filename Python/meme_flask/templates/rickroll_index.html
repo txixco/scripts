@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>
+            Meme Website
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="refresh" content="30; url=http://192.168.1.73:8080/" />
+
+        <style>
+            body {
+                color: #fff;
+                background-color: #000; 
+                background-repeat: no-repeat;
+                background-position: top left;
+            }
+
+            h1 {
+                text-align: center;
+                font-family: Arial, sans-serif;
+            }
+
+            p {
+                text-align: center;
+                font-family: Georgia, serif;
+                font-style: normal;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>A website to gather some memes!</h1>
+        <p>Here is your meme! This will refresh in 30 seconds!</p>
+        <p><video width="560" height="315" autoplay muted >
+            <source src="{{ url_for('static', filename='rickroll.mp4') }}" type="video/mp4" />
+        </video></p>
+        <p>Current subreddit: {{subreddit}} </p>
+    </body>
+</html>

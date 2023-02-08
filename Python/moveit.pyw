@@ -12,8 +12,9 @@ from winutils import move_mouse
 
 from kivy.config import Config
 Config.set("graphics", "width", "300")
-Config.set("graphics", "height", "50")
+Config.set("graphics", "height", "100")
 Config.set("graphics", "resizable", "False")
+Config.set("graphics", "borderless", "1")
 Config.set("kivy", "window_icon", "moveit.png")
 
 from kivy.core.window import Window

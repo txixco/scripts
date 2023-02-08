@@ -38,13 +38,9 @@ VPNStarted = true
 
 :*r:#intcel::+5215541904710
 :*:#cel::5541904710
-:*:#bncmr::4772913036789909
-:*:#hsbc::021180065117382348
 :*:#sacmex::2437199632010376
 :*:#fctvl::6273181119965742
 :*:#imss::21067302816
-:*:#env::Windows 7 Enterprise 64bits, Chrome 34
-:*:#sf::Salesforce
 
 :*:#ahora::
    FormatTime, CurrentDateTime,, dd/MM/yyyy HH:mm:ss

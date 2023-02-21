@@ -223,8 +223,9 @@ $Space::
 	Run "C:\Dropbox\Documents\scripts\killall.bat" chromedriver.exe
 	Return
 
-!w:: Send <
-!v:: Send >
+#!L::
+    Run "%A_appdata%\..\Local\Logseq\Logseq.exe"
+    return
 
 #M::
 	Run "%LINKS_PATH%\Utils\muCommander.lnk"
@@ -289,10 +290,6 @@ $Space::
 
 #!P::
     SendInput Francisco J Rueda C{Tab}4815153008293403{Tab}11{Tab}2023{Tab}
-    return
-
-#Q::
-    Run "%A_appdata%\..\Local\Logseq\Logseq.exe"
     return
 
 #!R::

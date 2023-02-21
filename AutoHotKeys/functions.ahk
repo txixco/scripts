@@ -52,7 +52,8 @@ OpenBrowser(URL, WinTitle, WidthPercent=50, Alternative=False)
     }
     else
     {
-        Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
+        Run "C:\Users\RuedaFranciscoJose\AppData\Local\Vivaldi\Application\vivaldi.exe" /new-window %URL%
+        ;Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
     }
 
     CenterWindow(WinTitle, , WidthPercent)

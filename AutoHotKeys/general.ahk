@@ -375,10 +375,10 @@ $Space::
 	Exit
 
     ControlClick Connect, Cisco AnyConnect Secure Mobility Client
-    MyWinWait("Cisco AnyConnect", "Answer", 10)
+    MyWinWait("Cisco AnyConnect", "Answer", 30)
 
     Run "%A_ProgramsCommon%\Entrust\IdentityGuard Soft Token.lnk"
-    MyWinWait("Entrust IdentityGuard Token", "Identities", 10)
+    MyWinWait("Entrust IdentityGuard Token", "Identities", 30)
     ControlClick x260 y143, Entrust IdentityGuard Token, Identities
     ClipWait 2
 

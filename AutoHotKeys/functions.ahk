@@ -48,11 +48,12 @@ OpenBrowser(URL, WinTitle, WidthPercent=50, Alternative=False)
 {
     if (Alternative)
     {
-        Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
+        Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
     }
     else
     {
-        Run "C:\Program Files\qutebrowser\qutebrowser.exe" --target window %URL%
+        Run "C:\Users\RuedaFranciscoJose\AppData\Local\Vivaldi\Application\vivaldi.exe" /new-window %URL%
+        ;Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
     }
 
     CenterWindow(WinTitle, , WidthPercent)

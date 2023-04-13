@@ -176,15 +176,20 @@ $Space::
     return
 
 #+D::
+    ShowHotkeys(A_ScriptDir "\dictionaries.htk")
     Input key, L1
     if (key = "D")
     {
         OpenBrowser("https://dle.rae.es/?w=diccionario", "Diccionario")
-    } else if (key = "W") {
-        OpenBrowser("https://www.wordreference.com", "WordReference", 70)
+    } else if (key = "L") {
+        OpenBrowser("https://www.leo.org", "LEO.org", 70)
     } else if (key = "T") {
         OpenBrowser("https://www.deepl.com/translator", "DeepL Translate", 70)
+    } else if (key = "W") {
+        OpenBrowser("https://www.wordreference.com", "WordReference", 70)
     }
+
+    Gui Destroy
 
     return
 

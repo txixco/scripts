@@ -278,6 +278,11 @@ $Space::
 
     return
 
+#^N::
+    EnvGet LocalAppData, "LOCALAPPDATA"
+    Run "%LINKS_PATH%\Utils\Neovim" "%LocalAppData%\nvim\init.vim"
+    return
+
 ; Open the selected file in the last activated window
 #O::
    SendInput ^{Insert}

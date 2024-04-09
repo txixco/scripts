@@ -158,7 +158,7 @@ $Space::
     Input key, L1
     if (key = "V")
     {
-        Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Data\Downloads\vi-vim-cheat-sheet.gif /hide=15 /pos=(271,53)
+        Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Datos\Downloads\vi-vim-cheat-sheet.gif /hide=15 /pos=(271,53)
     } else if (key = ".") {
         MsgBox "Tecla todavía no implementada"
     }
@@ -212,7 +212,7 @@ $Space::
     return
 
 #H::
-    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Data\Downloads\horario.jpg /hide=15 /pos=(271,53)
+    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Datos\Downloads\horario.jpg /hide=15 /pos=(271,53)
 
     return
 

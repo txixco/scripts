@@ -31,10 +31,7 @@ VPNStarted = true
 :*:@paymex::txixco.paymex@gmail.com
 :*:@plumas::frueda{+}plumas@aleeas.com
 
-:*:@west::fjrueda@west.com
-:*:@intrado::fjrueda@intrado.com
-:*:@autobot::automationbot@west.com
-:*:@rpa::rpa_dev@west.com
+:*:@minsait::fjruedac@minsait.com
 
 :*r:#intcel::+5215541904710
 :*:#cel::5541904710

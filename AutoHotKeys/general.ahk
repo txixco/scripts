@@ -223,7 +223,7 @@ $Space::
     Return
 
 #K::
-	Run "C:\Dropbox\Documents\scripts\killall.bat" chromedriver.exe
+	Run "C:\scripts\killEstorbos.bat"
 	Return
 
 #!L::
@@ -482,7 +482,7 @@ $Space::
 ; Window dependent help
 #IfWinActive, WebStorm
 #F1::
-    Run "C:\Dropbox\My Ebooks\WebStorm_ReferenceCard_Windows_Linux.pdf"
+    Run "C:\Datos\My Ebooks\WebStorm_ReferenceCard_Windows_Linux.pdf"
     Return
 #IfWinActive
 

@@ -469,16 +469,6 @@ $Space::
 <^>!+`:: Send ª
 <^>!.:: Send …
 
-; Enclose between parentheses
-#8::
-	bak = %clipboard%	; So it can be restored
-	Send ^{Insert}
-	ClipWait
-	clipboard = (%clipboard%)
-	Send +{Insert}
-	clipboard = %bak%
-	return
-
 ; Window dependent help
 #IfWinActive, WebStorm
 #F1::

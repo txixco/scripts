@@ -230,14 +230,6 @@ $Space::
     Run "%A_appdata%\..\Local\Logseq\Logseq.exe"
     return
 
-#M::
-	Run "%LINKS_PATH%\Utils\muCommander.lnk"
-	return
-
-#!M::
-    OpenBrowser("https://www.google.com/maps", "Google Maps", 70)
-    return
-
 #+M::
     Input key, L1
     if (key = "W")

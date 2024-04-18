@@ -591,15 +591,9 @@ $Space::
 ;	Sort clipboard, N D,
 	return
 
-; Copy without the n first characters
+; Paste in Irfanview the image in the clipboard
 #Insert::
-    Send ^{Insert}
-    ClipWait
-    clipboard = SubStr(%clipboard%, %InitChar%)
-    return
-
-#!Insert::
-   	InputBox InitChar, Set variables, Number of characters?, , , , , , , , %InitChar%
+    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" /clippaste
     return
 
 #Delete::
@@ -667,10 +661,8 @@ Pause::
 ; * Multimedia Real *
 ; *******************
 
-#^Insert::
 ^Media_Play_Pause:: Run "%A_AppData%\Spotify\Spotify.exe"
 
-#+Insert::
 +Media_Play_Pause::
     ShowHotkeys(A_ScriptDir "\spotify.htk")
     Input key, L1

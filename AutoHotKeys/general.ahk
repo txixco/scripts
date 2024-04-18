@@ -232,22 +232,10 @@ $Space::
 
 #+M::
     Input key, L1
-    if (key = "W")
+    if (key = "M")
     {
-        Run "%A_ProgramsCommon%\Webex\Webex.lnk"
-        title = Webex
-    } else if (key = "M")
-    {
-        Run "%A_ProgramsCommon%\Microsoft Teams.lnk"
+        Run "%LINKS_PATH%\Microsoft Teams.lnk"
         title = Microsoft Teams
-    } else if (key = "S")
-    {
-        Run "%A_AppData%\Microsoft\Windows\Start Menu\Programs\Signal.lnk"
-        title = Signal
-    } else if (key = "K")
-    {
-        Run "C:\Program Files (x86)\Microsoft\Skype for Desktop\Skype.exe"
-        title = Skype
     }
 
     CenterWindow(title, , 70)

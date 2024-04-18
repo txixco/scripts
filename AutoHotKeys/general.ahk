@@ -231,6 +231,7 @@ $Space::
     return
 
 #+M::
+    ShowHotkeys(A_ScriptDir "\messaging.htk")
     Input key, L1
     if (key = "M")
     {
@@ -238,6 +239,7 @@ $Space::
         title = Microsoft Teams
     }
 
+    Gui Destroy
     CenterWindow(title, , 70)
 
     return

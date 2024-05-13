@@ -9,6 +9,8 @@ tomorrow += 1, days
 FormatTime date, %tomorrow%, dd/MM/yyyy
 filas = 2
 
+myMonths := ["nr", "fbrr", "mrz", "brl", "my", "jn", "jl", "gst", "sptmbr", "ctbr", "nvmbr", "dcmbr"]
+
 VPNStarted = true
 
 ; *************
@@ -22,19 +24,17 @@ VPNStarted = true
 ; **************
 
 :*:@proton::frueda@protonmail.com
-:*:@tuta::frueda@tutanota.com
+:*:@tuta::frueda@tuta.com
 :*:@outlook::txixco@outlook.com
 :*:@txixco::txixco@gmail.com
 :*:@frueda::fruedadev@gmail.com
 
 :*:@kindle::txixco_kindle@kindle.com
-:*:@paymex::txixco.paymex@gmail.com
-:*:@plumas::frueda{+}plumas@aleeas.com
 
 :*:@minsait::fjruedac@minsait.com
 
 :*r:#intcel::+5215541904710
-:*:#cel::5541904710
+:*:#cel::621088186
 :*:#sacmex::2437199632010376
 :*:#fctvl::6273181119965742
 :*:#imss::21067302816
@@ -60,11 +60,9 @@ VPNStarted = true
 :*:#dplct::Changed the status to 'Duplicate'
 :*r:#jcomment::JIRA ID #AQA-
 
-:*:fjr::Francisco J. Rueda
+::fjr::Francisco J. Rueda
 :*:yw::you're welcome
 :*:np::no problem
-:*:jf::Jean-François
-:*:botw::Breath of the Wild
 
 :*:mdfdb::
     Comment := "Modified by " . GetComment()
@@ -225,6 +223,12 @@ $Space::
 #K::
 	Run "C:\scripts\killEstorbos.bat"
 	Return
+
+#^L::
+    Sleep 500
+    abbr := myMonths[A_MM]
+    Send fjruedac{Tab}MNST%A_Year%%abbr%{!}{Enter}
+    Return
 
 #!L::
     Run "%A_appdata%\..\Local\Logseq\Logseq.exe"

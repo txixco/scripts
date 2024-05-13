@@ -9,8 +9,6 @@ tomorrow += 1, days
 FormatTime date, %tomorrow%, dd/MM/yyyy
 filas = 2
 
-myMonths := ["nr", "fbrr", "mrz", "brl", "my", "jn", "jl", "gst", "sptmbr", "ctbr", "nvmbr", "dcmbr"]
-
 VPNStarted = true
 
 ; *************
@@ -223,12 +221,6 @@ $Space::
 #K::
 	Run "C:\scripts\killEstorbos.bat"
 	Return
-
-#^L::
-    Sleep 500
-    abbr := myMonths[A_MM]
-    Send fjruedac{Tab}MNST%A_Year%%abbr%{!}{Enter}
-    Return
 
 #!L::
     Run "%A_appdata%\..\Local\Logseq\Logseq.exe"

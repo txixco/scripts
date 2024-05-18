@@ -1,4 +1,4 @@
-module Maths where
+module Maths.General where
 
 isDivisible :: Int -> Int -> Bool
 isDivisible 0 _ = True
@@ -19,7 +19,7 @@ sqrtFactors n = [x | x <- [2..(round (sqrt (fromIntegral n)))], isDivisible n x]
 
 isPrime :: Int -> Bool
 isPrime 1 = False
-isPrime n = length (sqrtFactors n) == 0
+isPrime n = null (sqrtFactors n)
 
 primes :: [Int]
 primes = sieve [2..]

@@ -691,10 +691,9 @@ Pause::
     return
 
 #!Home::
-!Browser_Home:: Run C:\Program Files\qutebrowser\qutebrowser.exe
-
+!Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe"
 #^Home::
-^Browser_Home:: Run C:\Program Files\qutebrowser\qutebrowser.exe %clipboard%
+^Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe" %clipboard%
 
 ; ***************************
 ; * Hotkeys - Geometry Mode *

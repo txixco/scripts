@@ -1,0 +1,12 @@
+{
+  "B" : { "Name" : "Bible Reading Music" },
+  "C" : { "Name" : "Christian Instrumental Chill" },
+  "D" : { "Name" : "Demon Hunter" },
+  "F" : { "Name" : "Electronic Focus" },
+  "J" : { "Name" : "DJJireh" },
+  "L" : { "Name" : "Learning Music" },
+  "M" : { "Name" : "MercyMe" },
+  "P" : { "Name" : "Piano Prayer" },
+  "R" : { "Name" : "Rolones de la chorch XD" },
+  "T" : { "Name" : "Techno-praise" }
+}

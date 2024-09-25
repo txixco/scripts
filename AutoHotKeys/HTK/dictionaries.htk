@@ -1,0 +1,6 @@
+{
+  "D" : { "Name" : "DRAE", "URL" : "https://dle.rae.es/?w=diccionario", "Title" : "Diccionario" },
+  "L" : { "Name" : "LEO.org", "URL" : "https://www.leo.org", "Title" : "LEO.org" },
+  "T" : { "Name" : "Translator", "URL" : "https://www.deepl.com/translator", "Title" : "DeepL Translate" },
+  "W" : { "Name" : "Wordreference", "URL" : "https://www.wordreference.com", "Title" : "WordReference" }
+}

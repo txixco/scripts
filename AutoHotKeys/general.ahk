@@ -268,10 +268,6 @@ $Space::
     SendInput frueda@protonmail.com{Tab}5541904710
     return
 
-#!P::
-    SendInput Francisco J Rueda C{Tab}4815153008293403{Tab}11{Tab}2023{Tab}
-    return
-
 #!R::
     OpenBrowser("https://read.amazon.com/", "Kindle")
     return
@@ -339,33 +335,6 @@ $Space::
     Run "%A_ProgramsCommon%\UiPath\UiPath Studio"
     return
 
-#!V::
-    Run "%A_ProgramsCommon%\Cisco\Cisco AnyConnect Secure Mobility Client\Cisco AnyConnect Secure Mobility Client"
-
-    return
-
-#^V::
-    Run "%A_ProgramsCommon%\Cisco\Cisco AnyConnect Secure Mobility Client\Cisco AnyConnect Secure Mobility Client"
-    MyWinWait("Cisco AnyConnect Secure Mobility Client", "", 30)
-    ControlClick Disconnect, Cisco AnyConnect Secure Mobility Client
-    if !ErrorLevel
-	Exit
-
-    ControlClick Connect, Cisco AnyConnect Secure Mobility Client
-    MyWinWait("Cisco AnyConnect", "Answer", 30)
-
-    Run "%A_ProgramsCommon%\Entrust\IdentityGuard Soft Token.lnk"
-    MyWinWait("Entrust IdentityGuard Token", "Identities", 30)
-    ControlClick x260 y143, Entrust IdentityGuard Token, Identities
-    ClipWait 2
-
-    WinActivate Cisco AnyConnect, Answer
-    Send +{Insert}{Enter}
-
-    WinClose Entrust IdentityGuard Token
-
-    return
-
 #+V::
     Run "%LINKS_PATH%\RDP\aaron.rdp"
 	return
@@ -403,7 +372,9 @@ $Space::
     return
 
 ; Open Outlook
-#Z::Run outlook.exe
+#Z::
+    Run outlook.exe
+	return
 
 ; New items on Outlook
 #+Z::

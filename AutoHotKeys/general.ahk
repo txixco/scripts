@@ -269,7 +269,7 @@ $Space::
     return
 
 #!R::
-    OpenBrowser("https://read.amazon.com/", "Kindle")
+    OpenBrowser("https://read.amazon.com/", "Kindle", , True)
     return
 
 #+R::

@@ -640,10 +640,25 @@ Pause::
 
     return
 
-#!Home::
-!Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe"
-#^Home::
-^Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe" %clipboard%
+#^Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe" %clipboard%
+
++Browser_Home::
+    obj := ShowHotkeys("browsers")
+    Input key, L1
+    if (key = "B")
+    {
+    	Run ""
+    } else if (key = "F") {
+    	Run "C:\Program Files\Mozilla Firefox\firefox.exe" 
+    } else if (key = "Q") {
+    	Run "C:\Program Files\qutebrowser\qutebrowser.exe"
+    } else if (key = "V") {
+    	Run "%A_appdata%\..\Local\Vivaldi\Application\vivaldi.exe"
+    }
+
+    Gui Destroy
+
+    return
 
 ; ***************************
 ; * Hotkeys - Geometry Mode *

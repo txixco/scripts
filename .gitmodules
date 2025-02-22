@@ -1,0 +1,3 @@
+[submodule "Python/MoveIt"]
+	path = Python/MoveIt
+	url = git@github.com:txixco/moveit.git

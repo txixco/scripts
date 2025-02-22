@@ -1,0 +1,7 @@
+{
+  "B" : { "Name" : "Brave" },
+  "E" : { "Name" : "Edge" },
+  "F" : { "Name" : "Firefox" },
+  "Q" : { "Name" : "Qutebrowser" },
+  "V" : { "Name" : "Vivaldi" }
+}

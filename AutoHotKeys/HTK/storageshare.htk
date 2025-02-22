@@ -1,0 +1,5 @@
+{
+  "A" : { "Name" : "Files", "URL" : "https://nx15083.your-storageshare.de/apps/files" },
+  "C" : { "Name" : "Calendar", "URL" : "https://nx15083.your-storageshare.de/apps/calendar" },
+  "T" : { "Name" : "Contacts", "URL" : "https://nx15083.your-storageshare.de/apps/contacts" }
+}

@@ -1,0 +1,7 @@
+{
+  "A" : { "Name" : "Appointment" },
+  "J" : { "Name" : "Journal Entry" },
+  "M" : { "Name" : "Message" },
+  "N" : { "Name" : "Sticky Note" },
+  "T" : { "Name" : "Task" }
+}

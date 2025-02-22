@@ -1,3 +1,5 @@
+#Include <Jxon>
+
 GetComment()
 {
 	FormatTime CurrentDate, , M/dd/yyyy
@@ -10,16 +12,29 @@ Explorer(file)
 		return
 }
 
-ShowHotkeys(FileName)
+ShowHotkeys(Program)
 {
-    FileRead MyText, %FileName%
+	file := A_ScriptDir "\HTK\" Program ".htk"
+	StringUpper Program, Program, T
 
-    Gui -Caption +AlwaysOnTop +Disabled -SysMenu +Owner
+    FileRead MyText, %file%
+	json := Jxon_Load(MyText)
+	count := json.Count()
+
+    Gui +Caption +AlwaysOnTop +Disabled -SysMenu +Owner
     Gui Color, AAAAAA
     Gui +LastFound
     WinSet Transparent, 220
-    Gui Add, Text, , %MyText%
-    Gui Show, NoActivate, Hotkeys for Spotify
+
+	for key, value in json
+    {
+		name := value.Name
+        Gui Add, Text, , %key%`t%name%
+    }
+
+    Gui Show, NoActivate, Hotkeys for %Program%
+
+	return json
 }
 
 CenterWindow(WinTitle, Width:=-1, WidthPercent:=50, ShiftPercent:=0)
@@ -34,7 +49,7 @@ CenterWindow(WinTitle, Width:=-1, WidthPercent:=50, ShiftPercent:=0)
 	    Width := A_ScreenWidth * WidthPercent / 100
     }
 
-	Height := A_ScreenHeight * 0.90
+	Height := A_ScreenHeight * 0.80
 	Shift := A_ScreenWidth * ShiftPercent / 100
 	X := (A_ScreenWidth/2) - (Width/2) - Shift
 	Y := (A_ScreenHeight/2) - (Height/2)
@@ -52,7 +67,7 @@ OpenBrowser(URL, WinTitle, WidthPercent=50, Alternative=False)
     }
     else
     {
-        Run "C:\Users\RuedaFranciscoJose\AppData\Local\Vivaldi\Application\vivaldi.exe" /new-window %URL%
+        Run "C:\Users\fjruedac\AppData\Local\Vivaldi\Application\vivaldi.exe" /new-window %URL%
         ;Run "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window %URL%
     }
 

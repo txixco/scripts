@@ -123,7 +123,7 @@ $Space::
 	return
 
 #A::
-	OpenBrowser("https://alexa.amazon.com.mx", "Amazon Alexa", 70)
+	OpenBrowser("https://alexa.amazon.com.mx", "Amazon Alexa", 60)
 	return
 
 #B::
@@ -170,20 +170,16 @@ $Space::
     return
 
 #+D::
-    ShowHotkeys(A_ScriptDir "\dictionaries.htk")
-    Input key, L1
-    if (key = "D")
-    {
-        OpenBrowser("https://dle.rae.es/?w=diccionario", "Diccionario")
-    } else if (key = "L") {
-        OpenBrowser("https://www.leo.org", "LEO.org", 70)
-    } else if (key = "T") {
-        OpenBrowser("https://www.deepl.com/translator", "DeepL Translate", 70)
-    } else if (key = "W") {
-        OpenBrowser("https://www.wordreference.com", "WordReference", 70)
-    }
+    obj := ShowHotkeys("dictionaries")
 
+    Input key, L1
     Gui Destroy
+
+	url := obj[key].URL
+	title := obj[key].Title
+
+	if (url <> "")
+	    OpenBrowser(url, title, "70")
 
     return
 
@@ -207,6 +203,7 @@ $Space::
 
 #H::
     Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Datos\Downloads\horario.jpg /hide=15 /pos=(271,53)
+	CenterWindow("horario.jpg", 1058)
 
     return
 
@@ -227,16 +224,18 @@ $Space::
     return
 
 #+M::
-    ShowHotkeys(A_ScriptDir "\messaging.htk")
-    Input key, L1
-    if (key = "M")
-    {
+    ;obj := ShowHotkeys("messaging")
+    ;Input key, L1
+
+    ;if (key = "M")
+    ;{
         Run "%LINKS_PATH%\Microsoft Teams.lnk"
         title = Microsoft Teams
-    }
+    ;}
 
-    Gui Destroy
-    CenterWindow(title, , 70)
+    ;Gui Destroy
+
+    CenterWindow(title, , 60)
 
     return
 
@@ -245,7 +244,7 @@ $Space::
     return
 
 #!N::
-    Run "%A_AppData%\Microsoft\Windows\Start Menu\Programs\Emacs-28.1\Emacs.lnk"
+    Run "%A_AppData%\Microsoft\Windows\Start Menu\Programs\Emacs-29.1\Emacs.lnk"
 
     return
 
@@ -261,12 +260,7 @@ $Space::
 
 ; Open the selected file in the last activated window
 #O::
-   SendInput ^{Insert}
-   ClipWait
-   SendInput !{Tab}
-   SendInput ^�
-   Sleep 500
-   SendInput +{Insert}
+   Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" "https://configure.zsa.io/ergodox-ez/layouts/P5DJE/latest"
 
    return
 
@@ -274,12 +268,8 @@ $Space::
     SendInput frueda@protonmail.com{Tab}5541904710
     return
 
-#!P::
-    SendInput Francisco J Rueda C{Tab}4815153008293403{Tab}11{Tab}2023{Tab}
-    return
-
 #!R::
-    OpenBrowser("https://read.amazon.com/", "Kindle")
+    OpenBrowser("https://read.amazon.com/", "Kindle", , True)
     return
 
 #+R::
@@ -287,24 +277,21 @@ $Space::
     return
 
 #+S::
-    ShowHotkeys(A_ScriptDir "\storageshare.htk")
-    Input key, L1
-    if (key = "A")
-    {
-    	OpenBrowser("https://nx15083.your-storageshare.de/apps/files", "Storage Share", 70)
-    } else if (key = "C") {
-    	OpenBrowser("https://nx15083.your-storageshare.de/apps/calendar", "Storage Share", 70)
-    } else if (key = "T") {
-    	OpenBrowser("https://nx15083.your-storageshare.de/apps/contacts", "Storage Share", 70)
-    }
-
-
+    obj := ShowHotkeys("storageshare")
     Gui Destroy
+
+    Input key, L1
+	url := obj[key].URL
+	title := obj[key].Title
+
+	if (url <> "")
+	    OpenBrowser(url, "Storage Share", "70")
+
     return
 
 #T::
     Run "%LINKS_PATH%\Utils\Debian.lnk"
-    CenterWindow("~", , 70)
+    CenterWindow("~", , 60)
     Return
 
 #!T::
@@ -348,32 +335,9 @@ $Space::
     Run "%A_ProgramsCommon%\UiPath\UiPath Studio"
     return
 
-#!V::
-    Run "%A_ProgramsCommon%\Cisco\Cisco AnyConnect Secure Mobility Client\Cisco AnyConnect Secure Mobility Client"
-
-    return
-
-#^V::
-    Run "%A_ProgramsCommon%\Cisco\Cisco AnyConnect Secure Mobility Client\Cisco AnyConnect Secure Mobility Client"
-    MyWinWait("Cisco AnyConnect Secure Mobility Client", "", 30)
-    ControlClick Disconnect, Cisco AnyConnect Secure Mobility Client
-    if !ErrorLevel
-	Exit
-
-    ControlClick Connect, Cisco AnyConnect Secure Mobility Client
-    MyWinWait("Cisco AnyConnect", "Answer", 30)
-
-    Run "%A_ProgramsCommon%\Entrust\IdentityGuard Soft Token.lnk"
-    MyWinWait("Entrust IdentityGuard Token", "Identities", 30)
-    ControlClick x260 y143, Entrust IdentityGuard Token, Identities
-    ClipWait 2
-
-    WinActivate Cisco AnyConnect, Answer
-    Send +{Insert}{Enter}
-
-    WinClose Entrust IdentityGuard Token
-
-    return
+#+V::
+    Run "%LINKS_PATH%\RDP\aaron.rdp"
+	return
 
 #W::
   if GeometryMode = true
@@ -391,15 +355,15 @@ $Space::
   Return
 
 #^W::
-    CenterWindow("")
+    CenterWindow("", , 40)
     return
 
 #!W::
-    CenterWindow("", , 70)
+    CenterWindow("", , 60)
     return
 
 #^!W::
-    CenterWindow("", , 70, 10)
+    CenterWindow("", , 60, 10)
     return
 
 #+W::
@@ -408,11 +372,13 @@ $Space::
     return
 
 ; Open Outlook
-#Z::Run outlook.exe
+#Z::
+    Run outlook.exe
+	return
 
 ; New items on Outlook
 #+Z::
-    ShowHotkeys(A_ScriptDir "\outlook.htk")
+    obj := ShowHotkeys("outlook")
     Input key, L1
     if (key = "A")
     {
@@ -431,7 +397,7 @@ $Space::
     return
 
 ; Open alternative emails
-#!Z::OpenMultiBrowser("ProtonMail", 70, "https://beta.protonmail.com/u/0/inbox", "https://mail.tutanota.com")
+#!Z::OpenMultiBrowser("ProtonMail", 60, "https://beta.protonmail.com/u/0/inbox", "https://mail.tutanota.com")
 
 ; *************************
 ; * Hotkeys - Non-Letters *
@@ -660,41 +626,39 @@ Pause::
 ^Media_Play_Pause:: Run "%A_AppData%\Spotify\Spotify.exe"
 
 +Media_Play_Pause::
-    ShowHotkeys(A_ScriptDir "\spotify.htk")
+    obj := ShowHotkeys("spotify")
+    Input key, L1
+    Gui Destroy
+
+	name := obj[key].Name
+	if (name == "")
+	    return
+
+	file := Format("{}\Spotify\{}.url", LINKS_PATH, name)
+
+    Run %file%
+
+    return
+
+#^Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe" %clipboard%
+
++Browser_Home::
+    obj := ShowHotkeys("browsers")
     Input key, L1
     if (key = "B")
     {
-    	Run "%LINKS_PATH%\Spotify\Bible Reading Music.url"
-    } else if (key = "C")
-    {
-    	Run "%LINKS_PATH%\Spotify\Christian Instrumental Chill.url"
-    } else if (key = "D")
-    {
-    	Run "%LINKS_PATH%\Spotify\Demon Hunter.url"
+    	Run ""
     } else if (key = "F") {
-    	Run "%LINKS_PATH%\Spotify\Electronic Focus.url"
-    } else if (key = "J") {
-    	Run "%LINKS_PATH%\Spotify\DJJireh.url"
-    } else if (key = "L") {
-    	Run "%LINKS_PATH%\Spotify\Learning Music.url"
-    } else if (key = "M") {
-    	Run "%LINKS_PATH%\Spotify\MercyMe.url"
-    } else if (key = "P") {
-    	Run "%LINKS_PATH%\Spotify\Piano Prayer.url"
-    } else if (key = "R") {
-    	Run "%LINKS_PATH%\Spotify\Rolones de la chorch XD.url"
-    } else if (key = "T") {
-    	Run "%LINKS_PATH%\Spotify\Techno-praise.url"
+    	Run "C:\Program Files\Mozilla Firefox\firefox.exe" 
+    } else if (key = "Q") {
+    	Run "C:\Program Files\qutebrowser\qutebrowser.exe"
+    } else if (key = "V") {
+    	Run "%A_appdata%\..\Local\Vivaldi\Application\vivaldi.exe"
     }
 
     Gui Destroy
+
     return
-
-#!Home::
-!Browser_Home:: Run C:\Program Files\qutebrowser\qutebrowser.exe
-
-#^Home::
-^Browser_Home:: Run C:\Program Files\qutebrowser\qutebrowser.exe %clipboard%
 
 ; ***************************
 ; * Hotkeys - Geometry Mode *

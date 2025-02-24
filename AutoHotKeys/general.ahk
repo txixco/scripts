@@ -648,6 +648,8 @@ Pause::
     if (key = "B")
     {
     	Run ""
+    } else if (key = "E") {
+    	Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
     } else if (key = "F") {
     	Run "C:\Program Files\Mozilla Firefox\firefox.exe" 
     } else if (key = "Q") {

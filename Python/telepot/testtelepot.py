@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 
+from os import getenv
 from telepot import Bot, glance
 from telepot.loop import MessageLoop
+from dotenv import load_dotenv
 from requests import get
 from threading import Thread, Event
 from time import sleep
 
-TELEGRAM_TOKEN = "7682218401:AAFqO8fT8H75B5i6FFEmguDbUkX1mHU290U"
+load_dotenv()
+
+TELEGRAM_TOKEN = getenv("TELEGRAM_TOKEN")
+if not TELEGRAM_TOKEN:
+	print("Error: TOKEN no encontrado.")
+	exit(1)
 
 bot: Bot = None
-
-def keep_typing(chat_id, stop_event):
-    while not stop_event.is_set():
-        bot.sendChatAction(chat_id, 'typing')
-        sleep(4)
 
 def msg_loop(msg: str) -> None:
 	global bot
@@ -49,6 +51,27 @@ def show_help(chat_id: int) -> None:
 
 	bot.sendMessage(chat_id, text)
 
+def keep_typing(chat_id, stop_event):
+    while not stop_event.is_set():
+        bot.sendChatAction(chat_id, 'typing')
+        sleep(1)
+
+def obtain_fake_data(chat_id: str) -> dict:
+	data: dict = None
+	stop_event = Event()
+	typing_thread = Thread(target=keep_typing, args=(chat_id, stop_event))
+	typing_thread.start()
+
+	try:
+		req = get("https://randomuser.me/api/")
+		if req.status_code == 200:
+			data = req.json()
+	finally:
+		stop_event.set()
+		typing_thread.join()
+
+	return data
+
 def process_command(chat_id: int, text: str, who: dict) -> None:
 	match text:
 		case "/start":
@@ -59,25 +82,14 @@ def process_command(chat_id: int, text: str, who: dict) -> None:
 		case "/me":
 			bot.sendMessage(chat_id, f"Tu nombre es {who['first_name']} {who['last_name']}")
 		case "/fake":
-			stop_event = Event()
-			typing_thread = Thread(target=keep_typing, args=(chat_id, stop_event))
-			typing_thread.start()
-
-			try:
-				req = get("https://randomuser.me/api/")
-				if req.status_code == 200:
-					data = req.json()
-					name = data["results"][0]["name"]
-					email = data["results"][0]["email"]
-
-					bot.sendMessage(chat_id, f"{name['first']} {name['last']}\n{email}")
-				else:
-					bot.sendMessage(chat_id, "Error al obtener datos.")
-			finally:
-				stop_event.set()
-				typing_thread.join()
-		case "/stop":
-			bot.sendMessage(chat_id, "¡Hasta luego!")
+			obtained_data = obtain_fake_data(chat_id)
+			if obtained_data:
+				user = obtained_data["results"][0]
+				name = user["name"]
+				email = user["email"]
+				bot.sendMessage(chat_id, f"{name['first']} {name['last']}\n{email}")
+			else:
+				bot.sendMessage(chat_id, obtained_data)
 		case _:
 			bot.sendMessage(chat_id, "Comando no reconocido.")
 			show_help(chat_id)

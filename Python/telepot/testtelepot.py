@@ -16,18 +16,7 @@ if not TELEGRAM_TOKEN:
 	exit(1)
 
 bot: Bot = None
-
-def msg_loop(msg: str) -> None:
-	global bot
-
-	content_type, chat_type, chat_id = glance(msg)
-	text = msg["text"]
-	who = msg["from"]
-	
-	if content_type == "text" and text.startswith("/"):
-		process_command(chat_id, text, who)
-	else:
-		bot.sendMessage(chat_id, text)
+visits: dict = {}
 
 def get_commands() -> list:
 	req = get("https://api.telegram.org/bot{}/getMyCommands".format(TELEGRAM_TOKEN))
@@ -94,6 +83,23 @@ def process_command(chat_id: int, text: str, who: dict) -> None:
 			bot.sendMessage(chat_id, "Comando no reconocido.")
 			show_help(chat_id)
 				
+def msg_loop(msg: str) -> None:
+	global bot
+	global visits
+
+	content_type, chat_type, chat_id = glance(msg)
+	text = msg["text"]
+	who = msg["from"]
+	visits[chat_id] = visits.get(chat_id, 0) + 1
+	
+	if content_type == "text" and text.startswith("/"):
+		process_command(chat_id, text, who)
+	else:
+		bot.sendMessage(chat_id, text)
+	
+	if visits[chat_id] == 5:
+		bot.sendMessage(chat_id, "¡Por Cutie!, sí que te está gustando el bot 🦾")
+
 def main() -> None:
 	global bot
 

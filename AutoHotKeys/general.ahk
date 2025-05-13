@@ -640,14 +640,18 @@ Pause::
 
     return
 
-#^Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe" %clipboard%
+Browser_Home:: Run "%A_appdata%\..\Local\Vivaldi\Application\vivaldi.exe"
+
+!Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe"
+
+^Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe" %clipboard%
 
 +Browser_Home::
     obj := ShowHotkeys("browsers")
     Input key, L1
     if (key = "B")
     {
-    	Run ""
+    	Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
     } else if (key = "E") {
     	Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
     } else if (key = "F") {

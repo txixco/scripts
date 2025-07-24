@@ -10,7 +10,7 @@ from time import sleep
 
 load_dotenv()
 
-TELEGRAM_TOKEN = getenv("TEST_TELEGRAM_TOKEN")
+TELEGRAM_TOKEN = getenv("TEST_TOKEN")
 if not TELEGRAM_TOKEN:
 	print("Error: TOKEN no encontrado.")
 	exit(1)

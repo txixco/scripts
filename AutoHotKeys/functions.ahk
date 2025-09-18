@@ -2,8 +2,8 @@
 
 GetComment()
 {
-	FormatTime CurrentDate, , M/dd/yyyy
-		Return "frueda " . CurrentDate
+	FormatTime CurrentDate, , yyyyMMdd
+		Return CurrentDate . " FJR: "
 }
 
 Explorer(file)

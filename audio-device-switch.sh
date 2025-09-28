@@ -34,4 +34,4 @@ for input in $(pactl list short sink-inputs | awk '{print $1}'); do
 done
 
 # Notificar cambio (opcional)
-notify-send "Salida de audio cambiada a: $next_sink"
+notify-send "Salida de audio cambiada a: ${next_sink#alsa_output.}"

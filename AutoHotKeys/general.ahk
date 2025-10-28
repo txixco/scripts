@@ -291,7 +291,7 @@ $Space::
 
 #T::
     Run "%LINKS_PATH%\Utils\Debian.lnk"
-    CenterWindow("~", , 60)
+    CenterWindow("Debian", , 60)
     Return
 
 #!T::

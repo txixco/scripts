@@ -2,10 +2,10 @@
 #SingleInstance		; Only allows one instance of the script to run.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Win+A to change Audio Playback Device
+; Win+Play to change Audio Playback Device
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#Space::
+#Media_Play_Pause::
 	EnvAdd device, 1
 	device:=Mod(device, 3)
 

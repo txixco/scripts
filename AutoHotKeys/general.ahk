@@ -295,7 +295,7 @@ $Space::
 
 #T::
     Run "%LINKS_PATH%\Utils\Debian.lnk"
-    CenterWindow("Debian", , 60)
+    CenterWindow("Debian", , 40)
     Return
 
 #!T::
@@ -563,7 +563,7 @@ $Space::
     return
 
 #Delete::
-Pause::
+#Pause::
     Run "%LINKS_PATH%\Utils\MoveIt.lnk"
     return
 

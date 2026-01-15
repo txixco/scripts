@@ -37,7 +37,7 @@ ShowHotkeys(Program)
 	return json
 }
 
-CenterWindow(WinTitle, Width:=-1, WidthPercent:=50, ShiftPercent:=0)
+CenterWindow(WinTitle, Width:=-1, WidthPercent:=50, Proportion:=-1, ShiftPercent:=0)
 {
 	if (WinTitle = "")
 	{
@@ -49,7 +49,15 @@ CenterWindow(WinTitle, Width:=-1, WidthPercent:=50, ShiftPercent:=0)
 	    Width := A_ScreenWidth * WidthPercent / 100
     }
 
-	Height := Width * 0.70
+    if (Proportion = -1)
+    {
+        Height := A_ScreenHeight * 0.80
+    }
+    else
+    {
+        Height := Width * Proportion
+    }
+
 	Shift := A_ScreenWidth * ShiftPercent / 100
 	X := (A_ScreenWidth/2) - (Width/2) - Shift
 	Y := (A_ScreenHeight/2) - (Height/2)

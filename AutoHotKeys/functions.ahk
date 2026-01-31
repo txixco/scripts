@@ -2,8 +2,8 @@
 
 GetComment()
 {
-	FormatTime CurrentDate, , M/dd/yyyy
-		Return "frueda " . CurrentDate
+	FormatTime CurrentDate, , yyyyMMdd
+		Return CurrentDate . " FJR: "
 }
 
 Explorer(file)
@@ -49,7 +49,7 @@ CenterWindow(WinTitle, Width:=-1, WidthPercent:=50, ShiftPercent:=0)
 	    Width := A_ScreenWidth * WidthPercent / 100
     }
 
-	Height := A_ScreenHeight * 0.80
+	Height := Width * 0.70
 	Shift := A_ScreenWidth * ShiftPercent / 100
 	X := (A_ScreenWidth/2) - (Width/2) - Shift
 	Y := (A_ScreenHeight/2) - (Height/2)

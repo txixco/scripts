@@ -2,26 +2,26 @@
 #SingleInstance		; Only allows one instance of the script to run.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Win+A to change Audio Playback Device
+; Win+Play to change Audio Playback Device
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#Space::
+#Media_Play_Pause::
 	EnvAdd device, 1
 	device:=Mod(device, 3)
 
 	Switch device
 	{
 	    Case 0:
-		Run C:\Programs\NirCmd\nircmdc setdefaultsounddevice "Speakers"
+		Run C:\Programs\NirCmd\nircmdc setdefaultsounddevice "Speakers", , Hide
 		soundToggleBox("Speakers")
 		return
 	    Case 1:
-		Run C:\Programs\NirCmd\nircmdc setdefaultsounddevice "Headphones"
+		Run C:\Programs\NirCmd\nircmdc setdefaultsounddevice "Headphones", , Hide
 		soundToggleBox("Headphones")
 		return
 	    Case 2:
-		Run C:\Programs\NirCmd\nircmdc setdefaultsounddevice "Headset Earphone"
-		soundToggleBox("Headset Earphone")
+		Run C:\Programs\NirCmd\nircmdc setdefaultsounddevice "HDMI", , Hide
+		soundToggleBox("HDMI")
 		return
 	}
 Return

@@ -31,12 +31,16 @@ VPNStarted = true
 
 :*:@minsait::fjruedac@minsait.com
 
-:*r:#intcel::+5215541904710
+:*r:#intcel::+34621088186
 :*:#cel::621088186
 :*:#sacmex::2437199632010376
 :*:#fctvl::6273181119965742
 :*:#imss::21067302816
 :*:#empl::715193
+
+:*:#scr::Scripts SP7
+:*:#web::Web de cambios
+
 
 :*:#ahora::
    FormatTime, CurrentDateTime,, dd/MM/yyyy HH:mm:ss
@@ -291,7 +295,7 @@ $Space::
 
 #T::
     Run "%LINKS_PATH%\Utils\Debian.lnk"
-    CenterWindow("~", , 60)
+    CenterWindow("Debian", , 40)
     Return
 
 #!T::
@@ -559,7 +563,7 @@ $Space::
     return
 
 #Delete::
-Pause::
+#Pause::
     Run "%LINKS_PATH%\Utils\MoveIt.lnk"
     return
 

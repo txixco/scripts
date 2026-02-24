@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # --- Configuration ---
-DEST="~/Luis/src/$(basename $PWD)"
+DEST="$HOME/Luis/src/$(basename $PWD)"
 COMMIT=$(git rev-parse HEAD)
 
 if [ -z "$COMMIT" ]; then
@@ -10,7 +10,7 @@ if [ -z "$COMMIT" ]; then
 fi
 
 # --- Clean destination ---
-rm -rf "$DEST"/*
+rm -rf "$DEST"
 mkdir -p "$DEST" || exit 1
 
 # --- Export commit exactly as committed ---

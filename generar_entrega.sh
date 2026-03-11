@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 # --- Configuration ---
-DEST="$HOME/Luis/src/$(basename $PWD)"
+set -euo pipefail 
+
+DEST="$HOME/Luis/src/${PWD#*/Code/*}"
 COMMIT=$(git rev-parse HEAD)
 
-if [ -z "$COMMIT" ]; then
+if [[ -z "$COMMIT" ]]; then
     echo "Not a git repository"
     exit 1
 fi
@@ -14,9 +16,7 @@ rm -rf "$DEST"
 mkdir -p "$DEST" || exit 1
 
 # --- Export commit exactly as committed ---
-git archive "$COMMIT" | tar -x -C "$DEST"
-
-if [ $? -ne 0 ]; then
+if ! git archive "$COMMIT" | tar -x -C "$DEST"; then
     echo "Export failed"
     exit 1
 fi

@@ -31,12 +31,16 @@ VPNStarted = true
 
 :*:@minsait::fjruedac@minsait.com
 
-:*r:#intcel::+5215541904710
+:*r:#intcel::+34621088186
 :*:#cel::621088186
 :*:#sacmex::2437199632010376
 :*:#fctvl::6273181119965742
 :*:#imss::21067302816
 :*:#empl::715193
+
+:*:#scr::Scripts SP7
+:*:#web::Web de cambios
+
 
 :*:#ahora::
    FormatTime, CurrentDateTime,, dd/MM/yyyy HH:mm:ss
@@ -291,7 +295,7 @@ $Space::
 
 #T::
     Run "%LINKS_PATH%\Utils\Debian.lnk"
-    CenterWindow("~", , 60)
+    CenterWindow("Debian", , 50, 0.70)
     Return
 
 #!T::
@@ -559,7 +563,7 @@ $Space::
     return
 
 #Delete::
-Pause::
+#Pause::
     Run "%LINKS_PATH%\Utils\MoveIt.lnk"
     return
 
@@ -640,14 +644,18 @@ Pause::
 
     return
 
-#^Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe" %clipboard%
+Browser_Home:: Run "%A_appdata%\..\Local\Vivaldi\Application\vivaldi.exe"
+
+!Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe"
+
+^Browser_Home:: Run "C:\Program Files\Mozilla Firefox\firefox.exe" %clipboard%
 
 +Browser_Home::
     obj := ShowHotkeys("browsers")
     Input key, L1
     if (key = "B")
     {
-    	Run ""
+    	Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
     } else if (key = "E") {
     	Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
     } else if (key = "F") {

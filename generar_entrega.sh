@@ -21,4 +21,7 @@ if ! git archive "$COMMIT" | tar -x -C "$DEST"; then
     exit 1
 fi
 
+# --- Post export, if exists
+[[ -f post-export ]] && . ./post-export
+
 echo "Entrega generada desde commit $COMMIT en $DEST"

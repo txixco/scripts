@@ -207,8 +207,7 @@ $Space::
     return
 
 #H::
-    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Datos\Downloads\horario.jpg /hide=15 /pos=(271,53)
-	CenterWindow("horario.jpg", 1058)
+    Run "C:\Datos\Documents\Laboral\horas-2026.ods"
 
     return
 

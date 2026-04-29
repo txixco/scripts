@@ -272,6 +272,10 @@ $Space::
     SendInput frueda@protonmail.com{Tab}5541904710
     return
 
+#R::
+    Run "%A_AppData%\Microsoft\Windows\Start Menu\Programs\System Tools\Run.lnk"
+    Return
+
 #!R::
     OpenBrowser("https://read.amazon.com/", "Kindle", , True)
     return

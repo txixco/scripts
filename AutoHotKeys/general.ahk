@@ -40,6 +40,7 @@ VPNStarted = true
 
 :*:#scr::Scripts SP7
 :*:#web::Web de cambios
+:*:#php::Web de incrementales
 
 
 :*:#ahora::
@@ -206,8 +207,7 @@ $Space::
     return
 
 #H::
-    Run "%A_ProgramFiles%\IrfanView\i_view64.exe" C:\Datos\Downloads\horario.jpg /hide=15 /pos=(271,53)
-	CenterWindow("horario.jpg", 1058)
+    Run "C:\Datos\Documents\Laboral\horas-2026.ods"
 
     return
 
@@ -271,6 +271,10 @@ $Space::
 #P::
     SendInput frueda@protonmail.com{Tab}5541904710
     return
+
+#R::
+    Run "%A_AppData%\Microsoft\Windows\Start Menu\Programs\System Tools\Run.lnk"
+    Return
 
 #!R::
     OpenBrowser("https://read.amazon.com/", "Kindle", , True)
